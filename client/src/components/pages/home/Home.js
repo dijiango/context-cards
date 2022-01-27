@@ -9,7 +9,7 @@ function Home() {
   useEffect(() => {
     fetch('http://localhost:4000/decks')
     .then(r => r.json())
-    .then(data => console.log(data))
+    .then(data => setDeck(data))
   }, [])
 
 return (
