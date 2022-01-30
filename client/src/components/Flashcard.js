@@ -17,7 +17,7 @@ function Flashcard( {props} ) {
             <img src={deckIcon} alt="Deck of Cards" style={deckIconStyle}/>
         </DeckGrid>
         <DeckSummary>
-            <SummaryItem>Subject: </SummaryItem>
+            <SummaryItem>Subject: {props.deck.subject}</SummaryItem>
         </DeckSummary>
       </DivStyle>
   </div>
