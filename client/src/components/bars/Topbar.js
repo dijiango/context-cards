@@ -1,6 +1,8 @@
 import { TopbarWrapper, TopbarText, LeftRoutes } from './Topbar.styled';
 import { NavLink } from 'react-router-dom';
 import logo from '../images/context.gif';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { IconButton } from '@mui/material';
 
 const imgStyle = {
     height: "100px",
@@ -13,6 +15,11 @@ const textStyle = {
     fontSize: "15px",
     fontWeight: "bold",
     textDecoration: "none",
+}
+
+const iconStyle = {
+    color: "white",
+    fontSize: "50"
 }
 
 function Topbar() {
@@ -40,7 +47,7 @@ function Topbar() {
                     </LeftRoutes>
                 </div>
                 <div className='topbar-right' style={textStyle}>
-                    User Profile
+                    <IconButton><AccountCircleIcon style={iconStyle}/></IconButton>
                 </div>
             </TopbarText>
         </TopbarWrapper>

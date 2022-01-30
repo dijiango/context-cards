@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import Flashcard from '../../Flashcard';
 // import Flashcard from '../Flashcard';
 
 
@@ -9,7 +10,7 @@ function Home() {
   useEffect(() => {
     fetch('/decks')
     .then(r => r.json())
-    .then(data => console.log(data))
+    .then(data => setDeck(data))
   }, [])
 
   console.log(deck);
@@ -17,7 +18,7 @@ return (
   <div>
     {
     deck.map((deck) => {
-      <h2>You have a deck!</h2>
+      return <Flashcard key={deck.id} deck={deck}/>
     })
     }
   </div>

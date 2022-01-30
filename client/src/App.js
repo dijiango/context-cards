@@ -5,7 +5,7 @@ import Home from './components/pages/home/Home';
 import LandingPage from "./components/pages/landing/Landing";
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 function App() {
 
