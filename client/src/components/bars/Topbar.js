@@ -1,8 +1,9 @@
 import { TopbarWrapper, TopbarText, LeftRoutes } from './Topbar.styled';
 import { NavLink } from 'react-router-dom';
+import logo from '../images/context.gif';
 
 const imgStyle = {
-    height: "80px",
+    height: "100px",
     marginLeft: "-25px"
 }
 
@@ -23,7 +24,7 @@ function Topbar() {
                     <LeftRoutes>
                         <NavLink to="/">
                             <img 
-                            src={require('../images/context.gif')} 
+                            src={logo} 
                             alt='Context' 
                             style={imgStyle}/>
                         </NavLink>

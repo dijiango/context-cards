@@ -7,11 +7,12 @@ function Home() {
   const [deck, setDeck] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/decks')
+    fetch('/decks')
     .then(r => r.json())
-    .then(data => setDeck(data))
+    .then(data => console.log(data))
   }, [])
 
+  console.log(deck);
 return (
   <div>
     {
