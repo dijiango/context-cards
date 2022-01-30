@@ -47,7 +47,9 @@ function Topbar() {
                     </LeftRoutes>
                 </div>
                 <div className='topbar-right' style={textStyle}>
-                    <IconButton><AccountCircleIcon style={iconStyle}/></IconButton>
+                    <IconButton>
+                        <AccountCircleIcon style={iconStyle}/>
+                    </IconButton>
                 </div>
             </TopbarText>
         </TopbarWrapper>

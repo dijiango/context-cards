@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
-import Flashcard from '../../Flashcard';
-// import Flashcard from '../Flashcard';
+import Deck from '../../Deck';
+
 
 
 function Home() {
@@ -17,8 +17,8 @@ function Home() {
 return (
   <div>
     {
-    deck.map((deck) => {
-      return <Flashcard key={deck.id} deck={deck}/>
+    deck.map((item) => {
+      return <Deck key={item.id} deck={item}/>
     })
     }
   </div>
