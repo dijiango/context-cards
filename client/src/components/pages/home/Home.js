@@ -1,8 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import Deck from '../../Deck';
 
-
-
 function Home() {
 
   const [deck, setDeck] = useState([]);
