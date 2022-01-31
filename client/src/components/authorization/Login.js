@@ -63,7 +63,7 @@ function Login({ onLogin }) {
                         label="Password"
                         variant='standard'
                         color='secondary'
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
 

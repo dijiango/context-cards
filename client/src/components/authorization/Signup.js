@@ -18,28 +18,28 @@ const boxStyle = {
     alignItems: 'center'
 }
 
-function Signup() {
+function Signup({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     
     function handleSubmit(e){
-        // e.preventDefault();
-        // fetch("/signup", {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({username, email, password}),
-        // }).then((r) => {
-        // if (r.ok) {
-        //     r.json().then((user) => onLogin(user));
-        // } else {
-        //     return <p>The information you entered is invalid.</p>
-        // }
-        // });
-        // console.log("This is the user data", username, password, email);
+        e.preventDefault();
+        fetch("/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({username, email, password}),
+        }).then((r) => {
+        if (r.ok) {
+            r.json().then((user) => onLogin(user));
+        } else {
+            return <p>The information you entered is invalid.</p>
+        }
+        });
+        console.log("This is the user data", username, password, email);
     }
 
     const handleClickShowPassword = () => {
