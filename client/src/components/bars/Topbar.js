@@ -12,7 +12,7 @@ const imgStyle = {
 const textStyle = {
     color: "white",
     fontFamily: "Brush Script MT, cursive",
-    fontSize: "15px",
+    fontSize: "20px",
     fontWeight: "bold",
     textDecoration: "none",
 }

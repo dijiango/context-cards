@@ -1,28 +1,94 @@
-// function Login({ onLogin }) {
-//     const [username, setUsername] = useState("");
-  
-//     function handleSubmit(e) {
-//       e.preventDefault();
-//       fetch("/login", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ username }),
-//       })
-//         .then((r) => r.json())
-//         .then((user) => onLogin(user));
-//     }
-  
-//     return (
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           type="text"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//         <button type="submit">Login</button>
-//       </form>
-// )}
+import React, { useState } from 'react';
+import { Form, Title } from './Auth.styled';
+import { Container, Box, Paper, Stack, TextField, Button, IconButton, InputAdornment } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-//   export default Login;
+const buttonStyle = {
+    float: 'right',
+    margin: '20px 0px 10px'
+}
+
+const boxStyle = {
+    margin: 4,
+    paddingTop: 2,
+    paddingBottom: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+}
+
+function Login({ onLogin }) {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+  
+    function handleSubmit(e) {
+      e.preventDefault();
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      })
+        .then((r) => r.json())
+        .then((user) => onLogin(user));
+    }
+  
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    };
+
+    const handleMouseDownPassword = (e) => {
+        e.preventDefault();
+        setShowPassword(!showPassword)
+    };
+
+    return (
+        <Container component='main' maxWidth='sm'>
+        <Paper elevation={3}>
+            <Box sx={ boxStyle }>
+            <Title>Welcome Back!</Title> 
+            <Form onSubmit={handleSubmit}>
+                <Stack spacing={5}>
+                    <TextField
+                        label="Username"
+                        variant='standard'
+                        color='secondary'
+                        onChange={(e) => setUsername(e.target.value)}
+                        value={username}
+                    />
+                    <TextField
+                        label="Password"
+                        variant='standard'
+                        color='secondary'
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+
+                        InputProps={{
+                            endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                            )
+                        }}
+                    />
+                </Stack>
+                <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle} >Submit</Button>
+            </Form>
+            
+            </Box>
+        </Paper>
+    </Container>
+    )
+}
+
+  export default Login;

@@ -1,32 +1,36 @@
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Topbar from "./components/bars/Topbar";
 import Review from './components/pages/review/Review';
 import Create from './components/pages/create/Create';
 import Home from './components/pages/home/Home';
 import LandingPage from "./components/pages/landing/Landing";
+import CheckAccount from "./components/authorization/CheckUser";
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import { useEffect } from "react";
 
 function App() {
+  const [user, setUser] = useState(null);
 
-  // const [user, setUser] = useState(null);
+  useEffect(() => {
+    fetch ("/me")
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   fetch ("/me")
-  //   .then((response) => {
-  //     if (response.ok) {
-  //       response.json().then((user) => setUser(user));
-  //     }
-  //   });
-  // }, []);
-
-  // if (user) {
+  // if (!user) {
   //   return <h2>Welcome back, {user.username}</h2>
   // } else {
   //   return <Login onLogin = {setUser} />
   // }
+
+  if (!user) return <CheckAccount onLogin={setUser} />
+
   return (
-    <div className="App">
+    <div>
       <BrowserRouter>
         <Topbar />
         <Routes>
@@ -37,7 +41,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
 export default App;
