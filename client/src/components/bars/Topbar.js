@@ -2,7 +2,8 @@ import { TopbarWrapper, TopbarText, LeftRoutes } from './Topbar.styled';
 import { NavLink } from 'react-router-dom';
 import logo from '../images/context.gif';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
+
 
 const imgStyle = {
     height: "100px",
@@ -22,7 +23,25 @@ const iconStyle = {
     fontSize: "50"
 }
 
-function Topbar() {
+const buttonStyle = {
+    color: "#e2d5f2",
+    margin: "0px 20px 0px",
+    fontFamily: "Brush Script MT, cursive",
+    fontWeight: "bold",
+    fontSize: "15px"
+}
+
+function Topbar({ user, setUser }) {
+
+    const handleLogout = () => {
+        fetch("/logout", { method: "DELETE" })
+        .then((r) => {
+            if (r.ok) {
+                setUser(null)
+            }
+        })
+    }
+
   return (
     <div className='topbar'>
         <TopbarWrapper>
@@ -43,12 +62,17 @@ function Topbar() {
                         <NavLink to="/create" style={textStyle}>Create</NavLink>
                     </LeftRoutes>
                     <LeftRoutes>
-                        <NavLink to="/review" style={textStyle}>Review</NavLink>
+                        <NavLink to="/discover" style={textStyle}>Discover</NavLink>
                     </LeftRoutes>
                 </div>
                 <div className='topbar-right' style={textStyle}>
+                    <Button variant='outlined' color='inherit' style={buttonStyle} onClick={handleLogout}>
+                        Log Out
+                    </Button>
                     <IconButton>
-                        <AccountCircleIcon style={iconStyle}/>
+                        <AccountCircleIcon style={iconStyle}>
+                            {/* <NavLink to="/"/> */}
+                        </AccountCircleIcon>
                     </IconButton>
                 </div>
             </TopbarText>

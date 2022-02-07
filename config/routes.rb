@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  
+  resources :favorited_decks
+  resources :saved_decks
+  resources :users
   resources :flashcards
   resources :decks
 

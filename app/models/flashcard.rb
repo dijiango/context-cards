@@ -4,5 +4,5 @@ class Flashcard < ApplicationRecord
 
   validates :term, presence: true
   validates :meaning, presence: true
-  validates :interval, inclusion: 1..5
+  # validates :interval, inclusion: 1..5
 end

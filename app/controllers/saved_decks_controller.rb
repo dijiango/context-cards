@@ -1,0 +1,2 @@
+class SavedDecksController < ApplicationController
+end

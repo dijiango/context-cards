@@ -3,21 +3,27 @@ import Deck from '../../Deck';
 
 function Home() {
 
-  const [deck, setDeck] = useState([]);
+  const [decks, setDecks] = useState([]);
 
   useEffect(() => {
-    fetch('/decks')
+    fetch("/decks")
     .then(r => r.json())
-    .then(data => setDeck(data))
+    .then(data => setDecks(data))
   }, [])
 
-  console.log(deck);
+  console.log(decks);
 return (
   <div>
-    {
-    deck.map((item) => {
-      return <Deck key={item.id} deck={item}/>
-    })
+    {decks.length > 0 ? (
+      decks.map((item) => (
+        <Deck key={item.id} deck={item}/>
+      ))
+    ) : (
+      <>
+        <h2>You haven't added any decks yet.</h2>
+      </>
+    )
+    
     }
   </div>
 )}

@@ -1,16 +1,16 @@
 class DecksController < ApplicationController
     
         def index
-            render json: Deck.all, status: :ok
+            render json: @current_user.decks.all, status: :ok
         end
     
         def show
             deck = find_deck
-            render json: deck, status: :ok
+            render json: deck.flashcards, status: :ok
         end
     
         def create
-            deck = Deck.create!(deck_params)
+            deck = @current_user.decks.create!(deck_params)
             render json: deck, status: :created
         end
     
@@ -29,7 +29,7 @@ class DecksController < ApplicationController
         private
     
         def find_deck
-            Deck.find(params[:id])
+            @current_user.decks.find(params[:id])
         end
     
         def deck_params

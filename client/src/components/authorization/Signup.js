@@ -23,9 +23,12 @@ function Signup({ onLogin }) {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [errors, setErrors] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     
     function handleSubmit(e){
         e.preventDefault();
+        setErrors([]);
         fetch("/signup", {
             method: "POST",
             headers: {
@@ -33,11 +36,12 @@ function Signup({ onLogin }) {
             },
             body: JSON.stringify({username, email, password}),
         }).then((r) => {
-        if (r.ok) {
-            r.json().then((user) => onLogin(user));
-        } else {
-            return <p>The information you entered is invalid.</p>
-        }
+            setIsLoading(false);
+            if (r.ok) {
+                r.json().then((user) => onLogin(user));
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
         });
         console.log("This is the user data", username, password, email);
     }
@@ -97,6 +101,12 @@ function Signup({ onLogin }) {
                         />
                     </Stack>
                     <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle} >Submit</Button>
+                    {errors.map((err) => (
+                        <div>
+                            <span>!</span>
+                            <p>{err}</p>
+                        </div>
+                    ))}
                 </Form>
                 </Box>
             </Paper>

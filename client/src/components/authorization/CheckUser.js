@@ -6,7 +6,7 @@ import Signup from './Signup';
 
 
 
-function CheckAccount({ onLogin }) {
+function CheckUser({ onLogin }) {
     const [showLogin, setShowLogin] = useState(true)
 
     return (
@@ -31,4 +31,4 @@ function CheckAccount({ onLogin }) {
     )
 }
 
-export default CheckAccount;
+export default CheckUser;

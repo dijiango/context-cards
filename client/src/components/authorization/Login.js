@@ -22,6 +22,8 @@ function Login({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [errors, setErrors] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
   
     function handleSubmit(e) {
       e.preventDefault();
@@ -32,8 +34,15 @@ function Login({ onLogin }) {
         },
         body: JSON.stringify({ username, password }),
       })
-        .then((r) => r.json())
-        .then((user) => onLogin(user));
+        .then((r) => {
+            setIsLoading(false);
+            if (r.ok) {
+                r.json().then((user) => onLogin(user));
+              } else {
+                r.json().then((err) => setErrors(err.errors));
+              }
+        })
+        
     }
   
     const handleClickShowPassword = () => {
@@ -44,6 +53,8 @@ function Login({ onLogin }) {
         e.preventDefault();
         setShowPassword(!showPassword)
     };
+
+    console.log("User inputs:", username, password);
 
     return (
         <Container component='main' maxWidth='sm'>
@@ -82,7 +93,13 @@ function Login({ onLogin }) {
                         }}
                     />
                 </Stack>
-                <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle} >Submit</Button>
+                <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle}>Submit</Button>
+                {/* {errors.map((err) => (
+                    <div>
+                        <span>!</span>
+                        <p>{err}</p>
+                    </div>
+                ))} */}
             </Form>
             
             </Box>

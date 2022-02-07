@@ -2,6 +2,7 @@ class UsersController < ApplicationController
     skip_before_action :authorize, only: :create
     
         def show
+            # byebug
             render json: @current_user
         end
     
@@ -32,12 +33,12 @@ class UsersController < ApplicationController
         end
     
         def create_user_params
-            params.permit(:username, :password, :email)
+            params.permit(:username, :password, :password_confirmation, :email)
         end
     
-        def update_user_params
-            params.permit(:username, :password, :email, :image)
-        end
+        # def update_user_params
+        #     params.permit(:username, :password, :email, :image)
+        # end
 
     
     end 
