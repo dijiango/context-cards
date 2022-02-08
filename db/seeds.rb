@@ -34,21 +34,25 @@ Deck.create!([
     {
         subject: "Spanish verbs", 
         summary: "",
+        public: false,
         user_id:  rand(1..3)
     },
     {
         subject: "Biology 1000", 
         summary: "bio terms from Oct 24th lecture",
+        public: false,
         user_id:  rand(1..3)
     },
     {
         subject: "Greek Philosophers", 
         summary: "",
+        public: false,
         user_id:  rand(1..3)
     },
     {
         subject: "Trivia", 
         summary: "questions for game night",
+        public: false,
         user_id:  rand(1..3)
     }
 ])

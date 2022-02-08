@@ -4,7 +4,7 @@ class CreateFlashcards < ActiveRecord::Migration[6.1]
       t.text :term
       t.text :meaning
       t.belongs_to :deck, null: false, foreign_key: true
-
+      
       t.timestamps
     end
   end
