@@ -17,5 +17,15 @@ export const CreateOption = styled.tr`
 `
 
 export const OptionHeader = styled.th`
-
+    font-size: 40px;
 `
+
+export const OptionImg = styled.img`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto 50px 50px;
+    height: 300px;
+    width: auto;
+`
+
