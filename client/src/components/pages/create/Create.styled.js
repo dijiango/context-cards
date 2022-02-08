@@ -29,3 +29,12 @@ export const OptionImg = styled.img`
     width: auto;
 `
 
+export const Form = styled.form`
+    justify-content: center;
+    width: 75%;
+`
+
+export const Title = styled.h1`
+    margin: 50px;
+`
+

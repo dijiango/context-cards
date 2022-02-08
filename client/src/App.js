@@ -11,6 +11,8 @@ import CheckUser from "./components/authorization/CheckUser";
 
 import Temp from "./components/Temp";
 import Flashcard from "./components/flashcards/Flashcard";
+import NewCard from "./components/pages/create/NewCard";
+import NewDeck from "./components/pages/create/NewDeck";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,7 +33,9 @@ function App() {
       <BrowserRouter>
         <Topbar user={user} setUser={setUser}/>
         <Routes>
-          <Route path='/temp' element={ <Temp /> } />
+          <Route path='/temp' element={ <Flashcard /> } />
+          <Route path='/create/card' element={ <NewCard /> } />
+          <Route path='/create/deck' element={ <NewDeck /> } />
           <Route path='/discover' element={ <Discover /> } />
           <Route path='/create' element={ <Create /> } />
           <Route path='/home' element={ <Home /> } />

@@ -59,7 +59,7 @@ function Login({ onLogin }) {
     return (
         <Container component='main' maxWidth='sm'>
         <Paper elevation={3}>
-            <Box sx={ boxStyle }>
+            <Box sx={boxStyle}>
             <Title>Welcome Back!</Title> 
             <Form onSubmit={handleSubmit}>
                 <Stack spacing={5}>
