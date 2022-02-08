@@ -8,8 +8,6 @@ import Home from './components/pages/home/Home';
 import LandingPage from "./components/pages/landing/Landing";
 import CheckUser from "./components/authorization/CheckUser";
 
-
-import Temp from "./components/Temp";
 import Flashcard from "./components/flashcards/Flashcard";
 import NewCard from "./components/pages/create/NewCard";
 import NewDeck from "./components/pages/create/NewDeck";
@@ -17,16 +15,16 @@ import NewDeck from "./components/pages/create/NewDeck";
 function App() {
   const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   fetch ("/me")
-  //   .then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    fetch ("/me")
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
 
-  // if (!user) return <CheckUser onLogin={setUser} />
+  if (!user) return <CheckUser onLogin={setUser} />
 
   return (
     <div>

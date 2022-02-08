@@ -103,7 +103,6 @@ function Signup({ onLogin }) {
                     <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle} >Submit</Button>
                     {errors.map((err) => (
                         <div>
-                            <span>!</span>
                             <p>{err}</p>
                         </div>
                     ))}

@@ -94,12 +94,11 @@ function Login({ onLogin }) {
                     />
                 </Stack>
                 <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle}>Submit</Button>
-                {/* {errors.map((err) => (
+                {errors.map((err) => (
                     <div>
-                        <span>!</span>
                         <p>{err}</p>
                     </div>
-                ))} */}
+                ))}
             </Form>
             
             </Box>

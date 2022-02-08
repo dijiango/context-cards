@@ -5,7 +5,7 @@ User.destroy_all
 
 
 
-puts "Seeding..."
+puts "Seeding Users"
 
 User.create!([
     {
@@ -60,11 +60,11 @@ Deck.create!([
 puts "Seeding flashcards"
 
 5.times do
-    Flashcard.create!(term: Faker::Placeholdit.image(size: '20x20', format: 'jpg'), meaning: Faker::Lorem.sentence, interval: rand(1..5), deck_id: rand(1..4))
+    Flashcard.create!(term: Faker::Placeholdit.image(size: '20x20', format: 'jpg'), meaning: Faker::Lorem.sentence, deck_id: rand(1..4))
 end
 
 5.times do
-    Flashcard.create!(term: Faker::Hacker.noun, meaning: Faker::Hacker.say_something_smart, interval: rand(1..5), deck_id: rand(1..4))
+    Flashcard.create!(term: Faker::Hacker.noun, meaning: Faker::Hacker.say_something_smart, deck_id: rand(1..4))
 end
 
 
