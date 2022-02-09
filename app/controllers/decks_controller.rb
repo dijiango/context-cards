@@ -6,7 +6,7 @@ class DecksController < ApplicationController
     
         def show
             deck = find_deck
-            render json: deck.flashcards, status: :ok
+            render json: deck, status: :ok
         end
     
         def create

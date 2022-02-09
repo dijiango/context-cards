@@ -1,3 +1,3 @@
 class DeckSerializer < ActiveModel::Serializer
-  attributes :id, :subject, :summary
+  attributes :id, :subject, :summary, :flashcards
 end

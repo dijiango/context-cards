@@ -14,6 +14,7 @@ import NewDeck from "./components/pages/create/NewDeck";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [deckID, setDeckID] = useState('');
 
   useEffect(() => {
     fetch ("/me")
@@ -26,17 +27,26 @@ function App() {
 
   if (!user) return <CheckUser onLogin={setUser} />
 
+  function clickedDeck(id) {
+    setDeckID(id);
+  }
+
   return (
     <div>
       <BrowserRouter>
         <Topbar user={user} setUser={setUser}/>
         <Routes>
-          <Route path='/temp' element={ <Flashcard /> } />
+          {/* <Route path={`/decks/${}`} element={<Flashcard key={item.id} flashcards={item.flashcards}/>}
+            {
+              if (deckID === '') return (<Redirect to='/home' />)
+            }
+          /> */}
+          <Route path='/flashcards' element={ <Flashcard /> } />
           <Route path='/create/card' element={ <NewCard /> } />
           <Route path='/create/deck' element={ <NewDeck /> } />
-          <Route path='/discover' element={ <Discover /> } />
+          <Route path='/update' element={ <Discover /> } />
           <Route path='/create' element={ <Create /> } />
-          <Route path='/home' element={ <Home /> } />
+          <Route path='/home' element={ <Home clickedDeck={clickedDeck}/> } />
           <Route path='/' element={ <LandingPage /> } />
         </Routes>
       </BrowserRouter>

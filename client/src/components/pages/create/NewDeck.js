@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack, TextField, Button, Container, Box } from '@mui/material';
+import { Stack, TextField, Button, Container, Box, Paper } from '@mui/material';
 import { Form, Title } from './Create.styled';
 
 const buttonStyle = {
@@ -17,44 +17,60 @@ const boxStyle = {
 }
 
 function NewDeck() {
-    const [deckSubject, setDeckSubject] = useState();
-    const [deckSummary, setDeckSummary] = useState();
+    const [subject, setSubject] = useState();
+    const [summary, setSummary] = useState();
+    const [errors, setErrors] = useState([]);
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log("User submitted this form");
+        fetch("/decks", {
+            method: "POST",
+            headers:  {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                subject, summary
+            }),
+        })
+        .then(r => {
+            if (r.ok) {
+                r.json().then(setSubject(''), setSummary(''))
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+        })
     }
 
   return( 
   <div>
     <Container component='main' maxWidth='md'>
-    
+    <Paper elevation={3}>
     <Box sx={boxStyle}>
-
+    <Title>Tell Us About Your Deck</Title>
     <Form onSubmit={handleSubmit}>
-        <Title>Tell Us About Your Deck</Title>
-                <Stack spacing={5}>
-                    <TextField
-                        label="Subject"
-                        variant='standard'
-                        color='secondary'
-                        onChange={(e) => setDeckSubject(e.target.value)}
-                        // value={subject}
-                    />
-                    <TextField
-                        label="Summary"
-                        placeholder="Give this deck a little context..."
-                        variant='outlined'
-                        color='secondary'
-                        multiline
-                        rows={4}
-                        onChange={(e) => setDeckSummary(e.target.value)}
-                        // value={summary}
-                    />
-                </Stack>
-                <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle}>Submit</Button>
+        <Stack spacing={5}>
+        <TextField
+            label="Subject"
+            variant='standard'
+            color='secondary'
+            onChange={(e) => setSubject(e.target.value)}
+            value={subject}
+        />
+        <TextField
+            label="Summary"
+            placeholder="Give this deck a little context..."
+            variant='outlined'
+            color='secondary'
+            multiline
+            rows={4}
+            onChange={(e) => setSummary(e.target.value)}
+            value={summary}
+        />
+        </Stack>
+        <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle}>Submit</Button>
     </Form>
-    </Box>
+    </Box>      
+    </Paper>
     </Container>
   </div>
   )

@@ -25,7 +25,7 @@ User.create!([
         password: "user3",
         email: "lee@email.com",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-    } 
+    }
 ])
 
 puts "Seeding Decks"
@@ -35,25 +35,31 @@ Deck.create!([
         subject: "Spanish verbs", 
         summary: "",
         public: false,
-        user_id:  rand(1..3)
+        user_id: rand(1..3)
     },
     {
         subject: "Biology 1000", 
         summary: "bio terms from Oct 24th lecture",
         public: false,
-        user_id:  rand(1..3)
+        user_id: rand(1..3)
     },
     {
         subject: "Greek Philosophers", 
         summary: "",
         public: false,
-        user_id:  rand(1..3)
+        user_id: rand(1..3)
     },
     {
         subject: "Trivia", 
         summary: "questions for game night",
         public: false,
-        user_id:  rand(1..3)
+        user_id: rand(1..3)
+    },
+    {
+        subject: "Dad jokes", 
+        summary: "A collection of jokes and puns only a father could appreciate.",
+        public: false,
+        user_id: 1
     }
 ])
 
@@ -67,5 +73,47 @@ end
     Flashcard.create!(term: Faker::Hacker.noun, meaning: Faker::Hacker.say_something_smart, deck_id: rand(1..4))
 end
 
+Flashcard.create!([
+    {
+        term: "Dad, did you get a haircut?",
+        meaning: "No, I got them all cut!",
+        deck_id: 5
+    },
+    {
+        term: "Which bear is the most condescending?",
+        meaning: "A Pan-duh.",
+        deck_id: 5
+    },
+    {
+        term: "What do a tick and the Eiffel Tower have in common?",
+        meaning: "They're both parasites.",
+        deck_id: 5
+    },
+    {
+        term: "What do you call a fish wearing a bowtie?",
+        meaning: "Sofishticated.",
+        deck_id: 5
+    },
+    {
+        term: "How do you follow Will Smith in the snow?",
+        meaning: "You follow the fresh prints.",
+        deck_id: 5
+    },
+    {
+        term: "I thought the dryer was shrinking my clothes",
+        meaning: "Turns out it was the refrigerator all along",
+        deck_id: 5
+    },
+    {
+        term: "Why do seagulls fly over the ocean?",
+        meaning: "Because if they flew over the bay, we'd call them bagels.",
+        deck_id: 5
+    },
+    {
+        term: "Dad, did you get a haircut?",
+        meaning: "No, I got them all cut!",
+        deck_id: 5
+    }
+])
 
 puts "Done seeding"

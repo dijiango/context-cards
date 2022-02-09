@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardContainer, CarouselWrapper, Meaning, Term,  } from './Flashcard.styled';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
-import { Stack, Item, Paper } from '@mui/material';
+import { Stack, Paper } from '@mui/material';
+import Home from '../pages/home/Home';
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -45,7 +46,12 @@ const CardPreview = {
   }
 }
 
-function Flashcard() {
+function Flashcard( props ) {
+  const[flashcards, setFlashcards] = useState([]);
+
+  // useEffect(()=>{
+  //   fetch(`/decks/${props.deck.id}`)
+  // },[])
 
   function previousCard() {
     console.log("previous card");
@@ -55,8 +61,10 @@ function Flashcard() {
     console.log("next card");
   }
 
+  console.log(props.flashcards);
   return (
   <div>
+    
     <CardContainer>
         <ArrowBackIosNewIcon sx={ArrowAnimated} onClick={previousCard}/> 
 

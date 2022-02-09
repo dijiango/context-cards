@@ -15,7 +15,13 @@ const textStyle = {
     fontFamily: "Brush Script MT, cursive",
     fontSize: "20px",
     fontWeight: "bold",
-    textDecoration: "none",
+    textDecoration: "none"
+}
+
+const rightBar = {
+    display: "flex",
+    justifyContent: "center", 
+    alignText: "center"
 }
 
 const iconStyle = {
@@ -28,7 +34,14 @@ const buttonStyle = {
     margin: "0px 20px 0px",
     fontFamily: "Brush Script MT, cursive",
     fontWeight: "bold",
-    fontSize: "15px"
+    fontSize: "15px",
+    margin: "10px 20px"
+}
+
+const picStyle = {
+    height: "50px",
+    width: "50px",
+    borderRadius: "50%"
 }
 
 function Topbar({ user, setUser }) {
@@ -62,17 +75,16 @@ function Topbar({ user, setUser }) {
                         <NavLink to="/create" style={textStyle}>Create</NavLink>
                     </LeftRoutes>
                     <LeftRoutes>
-                        <NavLink to="/discover" style={textStyle}>Discover</NavLink>
+                        <NavLink to="/update" style={textStyle}>Update</NavLink>
                     </LeftRoutes>
                 </div>
-                <div className='topbar-right' style={textStyle}>
+                <div className='topbar-right' style={rightBar}>
                     <Button variant='outlined' color='inherit' style={buttonStyle} onClick={handleLogout}>
                         Log Out
                     </Button>
                     <IconButton>
-                        <AccountCircleIcon style={iconStyle}>
+                        {user.image ?  <img src={user.image} alt='User Pic' style={picStyle}/> : <AccountCircleIcon style={iconStyle} />}
                             {/* <NavLink to="/"/> */}
-                        </AccountCircleIcon>
                     </IconButton>
                 </div>
             </TopbarText>
