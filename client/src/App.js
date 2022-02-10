@@ -46,8 +46,8 @@ function App() {
           <Route path='/create/deck' element={ <NewDeck /> } />
           <Route path='/update' element={ <Discover /> } />
           <Route path='/create' element={ <Create /> } />
-          <Route path='/home' element={ <Home clickedDeck={clickedDeck}/> } />
-          <Route path='/' element={ <LandingPage /> } />
+          <Route path='/' element={ <Home clickedDeck={clickedDeck}/> } />
+          {/* <Route path='/' element={ <LandingPage /> } /> */}
         </Routes>
       </BrowserRouter>
     </div>
