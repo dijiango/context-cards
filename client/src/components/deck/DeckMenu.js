@@ -1,7 +1,8 @@
 import React from 'react'
 import ClearIcon from '@mui/icons-material/Clear';
 import { IconButton, Paper } from '@mui/material';
-import { DivStyle, MenuBox, PopupBox, TitleBar } from './Deck.styled';
+import { DivStyle,TitleBar } from './Deck.styled';
+import { MenuBox, PopupBox } from '../Popup.styled';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import QuizIcon from '@mui/icons-material/Quiz';
