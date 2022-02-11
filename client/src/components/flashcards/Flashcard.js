@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { CardContainer, CarouselWrapper, Meaning, Term,  } from './Flashcard.styled';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import { Stack, Paper } from '@mui/material';
-import Home from '../pages/home/Home';
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';

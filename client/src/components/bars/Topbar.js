@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { TopbarWrapper, TopbarText, LeftRoutes } from './Topbar.styled';
 import { NavLink } from 'react-router-dom';
 import logo from '../images/context.gif';
+import { Button, IconButton, Paper } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Button, IconButton } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 
 const imgStyle = {
@@ -44,7 +46,9 @@ const picStyle = {
     borderRadius: "50%"
 }
 
+
 function Topbar({ user, setUser }) {
+    const [isUserOpen, setisUserOpen] = useState(false);
 
     const handleLogout = () => {
         fetch("/logout", { method: "DELETE" })
@@ -82,13 +86,14 @@ function Topbar({ user, setUser }) {
                     <Button variant='outlined' color='inherit' style={buttonStyle} onClick={handleLogout}>
                         Log Out
                     </Button>
-                    <IconButton>
+                    <IconButton href='/user/settings'>
                         {user.image ?  <img src={user.image} alt='User Pic' style={picStyle}/> : <AccountCircleIcon style={iconStyle} />}
                             {/* <NavLink to="/"/> */}
                     </IconButton>
                 </div>
             </TopbarText>
         </TopbarWrapper>
+        
     </div>
 
 )}
