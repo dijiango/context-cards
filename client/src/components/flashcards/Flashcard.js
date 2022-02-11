@@ -53,39 +53,42 @@ function Flashcard( props ) {
     fetch(`/decks/${props.viewedDeck}`)
     .then((r) => {
       if (r.ok) {
-        r.json().then((cards) => setFlashcards(cards.flashcards));
+        r.json().then((cards) => {
+          setFlashcards(cards.flashcards);
+        });
       }
     });
-  }, [setFlashcards]);
+  }, []);
 
-  console.log("Flashcards", flashcards);
+  console.log("Flashcards", flashcards.length);
   // console.log("Flashcard", flashcards[currentCard].term);
 
-  function previousCard() {
+  function previousCard(current) {
     console.log("previous card");
-    if (currentCard === 0) {
+    if (current == 0) {
       setCurrentCard(flashcards.length);
     } else {
-      setCurrentCard(currentCard -= 1)
+      setCurrentCard(current -= 1)
     }
     console.log(currentCard);
   }
 
-  function nextCard() {
+  function nextCard(current) {
     console.log("next card");
-    if (currentCard === flashcards.length) {
+    if (current == flashcards.length) {
       setCurrentCard(0);
     } else {
-      setCurrentCard(currentCard += 1);
+      setCurrentCard(current += 1);
     }
+    console.log(currentCard);
   }
 
-  console.log(flashcards);
+  // console.log(flashcards);
   return (
   <div>
     
     <CardContainer>
-        <ArrowBackIosNewIcon sx={ArrowAnimated} onClick={previousCard}/> 
+        <ArrowBackIosNewIcon sx={ArrowAnimated} onClick={() => previousCard(currentCard)}/> 
 
       <Flippy style={FlippyStyle}>
           <FrontSide style={CardFace}>
@@ -98,16 +101,14 @@ function Flashcard( props ) {
           </BackSide>
       </Flippy>
 
-      <ArrowForwardIosIcon sx={ArrowAnimated} onClick={nextCard}/> 
+      <ArrowForwardIosIcon sx={ArrowAnimated} onClick={() => nextCard(currentCard)}/> 
 
     </CardContainer>
 
     <CarouselWrapper>
       <Stack direction="row" spacing={2} justifyContent='center'>
         {
-          flashcards.map((card) => {
-            <Paper sx={CardPreview}>{card.term}</Paper>
-          })
+          flashcards.map((card) => <Paper sx={CardPreview}>{card.term}</Paper>)
         }
       </Stack>
     </CarouselWrapper>

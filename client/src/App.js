@@ -35,16 +35,15 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Topbar user={user} setUser={setUser}/>
+        <Topbar key={user.id} user={user} setUser={setUser}/>
         <Routes>
-          <Route path='/user/settings' element={<UserSetting user={user}/>} />
+          <Route path='/user/settings' element={<UserSetting key={user.id} user={user}/>} />
           <Route path='/viewdeck' element={ <Flashcard viewedDeck={deckID}/> } />
           <Route path='/create/card' element={ <NewCard /> } />
           <Route path='/create/deck' element={ <NewDeck /> } />
           <Route path='/update' element={ <Discover /> } />
           <Route path='/create' element={ <Create /> } />
           <Route path='/' element={ <Home clickedDeck={clickedDeck}/> } />
-          {/* <Route path='/' element={ <LandingPage /> } /> */}
         </Routes>
       </BrowserRouter>
     </div>

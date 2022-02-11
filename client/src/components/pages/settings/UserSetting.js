@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { Button, Paper, Stack, TextField } from '@mui/material'
 
 const buttonStyle = {
-    margin: 'auto 50% 25px'
+    margin: 'auto 50% 50px'
+}
+
+const imageStyle = {
+    height: '500px',
+    margin: 'auto 50% 50px'
 }
 
 function UserSetting( props ) {
@@ -35,9 +40,10 @@ function UserSetting( props ) {
   return (
     <div>
         UserSetting
-        <Paper>
+        <Paper sx={{margin: '50px'}}>
+        <img src={props.user.image} alt='Profile Picture' style={imageStyle}/>
         <form onSubmit={handleSubmit}>
-        <Stack spacing={5} sx={{padding:'25px'}}>
+        <Stack spacing={5} sx={{padding:'50px 75px'}}>
         <TextField
             label="Username"
             variant='standard'
@@ -55,7 +61,7 @@ function UserSetting( props ) {
         <TextField
             label="Email"
             placeholder="Give this deck a little context..."
-            variant='outlined'
+            variant='standard'
             color='secondary'
             onChange={(e) => setEmail(e.target.value)}
             value={email}
