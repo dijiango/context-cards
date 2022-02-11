@@ -10,7 +10,8 @@ export const Title = styled.h1`
     color: #7863b0;
 `
 
-export const Caption = styled.p`
+export const Caption = styled.h3`
     text-align: center;
     font-size: 20px;
+    font-weight: normal;
 `

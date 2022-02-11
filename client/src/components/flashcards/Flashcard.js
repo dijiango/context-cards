@@ -48,20 +48,40 @@ const CardPreview = {
 
 function Flashcard( props ) {
   const[flashcards, setFlashcards] = useState([]);
+  const [currentCard, setCurrentCard] = useState(0);
 
-  // useEffect(()=>{
-  //   fetch(`/decks/${props.deck.id}`)
-  // },[])
+  useEffect(()=>{
+    fetch(`/decks/${props.viewedDeck}`)
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((cards) => setFlashcards(cards.flashcards));
+      }
+    });
+  }, [setFlashcards]);
+
+  console.log("Flashcards", flashcards);
+  // console.log("Flashcard", flashcards[currentCard].term);
 
   function previousCard() {
     console.log("previous card");
+    if (currentCard === 0) {
+      setCurrentCard(flashcards.length);
+    } else {
+      setCurrentCard(currentCard -= 1)
+    }
+    console.log(currentCard);
   }
 
   function nextCard() {
     console.log("next card");
+    if (currentCard === flashcards.length) {
+      setCurrentCard(0);
+    } else {
+      setCurrentCard(currentCard += 1);
+    }
   }
 
-  console.log(props.flashcards);
+  console.log(flashcards);
   return (
   <div>
     
@@ -70,12 +90,12 @@ function Flashcard( props ) {
 
       <Flippy style={FlippyStyle}>
           <FrontSide style={CardFace}>
-            <Term>Term</Term>
-            <p>Click to reveal answer!</p>
+            <Term>{flashcards[currentCard].term}</Term>
+            <span>Click to reveal answer!</span>
           </FrontSide>
           <BackSide style={CardFace}>
-            <Meaning>Lorem Ipsum</Meaning>
-            <p>Click to see what this term is!</p>
+            <Meaning>{flashcards[currentCard].meaning}</Meaning>
+            <span>Click to see what this term is!</span>
           </BackSide>
       </Flippy>
 
@@ -85,9 +105,11 @@ function Flashcard( props ) {
 
     <CarouselWrapper>
       <Stack direction="row" spacing={2} justifyContent='center'>
-        <Paper sx={CardPreview}>Card 1</Paper>
-        <Paper sx={CardPreview}>Card 2</Paper>
-        <Paper sx={CardPreview}>Card 3</Paper>
+        {
+          flashcards.map((card) => {
+            <Paper sx={CardPreview}>{card.term}</Paper>
+          })
+        }
       </Stack>
     </CarouselWrapper>
   </div>

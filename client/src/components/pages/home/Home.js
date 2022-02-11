@@ -1,7 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Deck from '../../Deck';
-import Flashcard from '../../flashcards/Flashcard';
+import Deck from '../../deck/Deck';
 import { DivStyle, TitleBar } from './Home.styled';
 
 
@@ -39,6 +37,7 @@ function Home( props ) {
 
   function setDeckID(id) {
     props.clickedDeck(id);
+    // console.log("deck id in home.js", id)
   }
   
   console.log(decks);
@@ -53,7 +52,8 @@ function Home( props ) {
         decks.map((item) => (
           <>
           <Deck 
-            key={item.id} deck={item} 
+            key={item.id} 
+            deck={item} 
             deckToDelete={deckToDelete} 
             showFlashcards={showFlashcards}
             setDeckID={setDeckID}

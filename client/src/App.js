@@ -29,6 +29,7 @@ function App() {
 
   function clickedDeck(id) {
     setDeckID(id);
+    // console.log("deck id in app.js", id);
   }
 
   return (
@@ -41,7 +42,7 @@ function App() {
               if (deckID === '') return (<Redirect to='/home' />)
             }
           /> */}
-          <Route path='/flashcards' element={ <Flashcard /> } />
+          <Route path='/viewdeck' element={ <Flashcard viewedDeck={deckID}/> } />
           <Route path='/create/card' element={ <NewCard /> } />
           <Route path='/create/deck' element={ <NewDeck /> } />
           <Route path='/update' element={ <Discover /> } />

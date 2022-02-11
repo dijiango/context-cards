@@ -13,7 +13,7 @@ export const Term = styled.h1`
     color: #4b3c73;
 `
 
-export const Meaning = styled.p`
+export const Meaning = styled.h3`
     font-size: 25px;
     /* color: #4b3c73; */
 `
