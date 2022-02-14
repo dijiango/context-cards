@@ -49,37 +49,38 @@ function Flashcard( props ) {
   const[flashcards, setFlashcards] = useState([]);
   const [currentCard, setCurrentCard] = useState(0);
 
-  useEffect(()=>{
-    fetch(`/decks/${props.viewedDeck}`)
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((cards) => {
-          setFlashcards(cards.flashcards);
-        });
-      }
-    });
-  }, []);
+  console.log("flashcard array", props.viewFlashcards);
+  // useEffect(()=>{
+  //   fetch(`/decks/${props.viewedDeck}`)
+  //   .then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((cards) => {
+  //         setFlashcards(cards.flashcards);
+  //       });
+  //     }
+  //   });
+  // }, []);
 
-  console.log("Flashcards", flashcards.length);
+  // console.log("Flashcards", flashcards.length);
   // console.log("Flashcard", flashcards[currentCard].term);
 
   function previousCard(current) {
     console.log("previous card");
-    if (current == 0) {
-      setCurrentCard(flashcards.length);
-    } else {
-      setCurrentCard(current -= 1)
-    }
+    // if (current == 0) {
+    //   setCurrentCard(flashcards.length);
+    // } else {
+    //   setCurrentCard(current -= 1)
+    // }
     console.log(currentCard);
   }
 
   function nextCard(current) {
     console.log("next card");
-    if (current == flashcards.length) {
-      setCurrentCard(0);
-    } else {
-      setCurrentCard(current += 1);
-    }
+    // if (current == flashcards.length) {
+    //   setCurrentCard(0);
+    // } else {
+    //   setCurrentCard(current += 1);
+    // }
     console.log(currentCard);
   }
 
@@ -92,11 +93,11 @@ function Flashcard( props ) {
 
       <Flippy style={FlippyStyle}>
           <FrontSide style={CardFace}>
-            <Term>{flashcards[currentCard].term}</Term>
+            {/* <Term>{flashcards[currentCard].term}</Term> */}
             <span>Click to reveal answer!</span>
           </FrontSide>
           <BackSide style={CardFace}>
-            <Meaning>{flashcards[currentCard].meaning}</Meaning>
+            {/* <Meaning>{flashcards[currentCard].meaning}</Meaning> */}
             <span>Click to see what this term is!</span>
           </BackSide>
       </Flippy>

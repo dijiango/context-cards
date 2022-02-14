@@ -6,7 +6,6 @@ import { DivStyle, TitleBar } from './Home.styled';
 
 function Home( props ) {
   const [decks, setDecks] = useState([]);
-  const[flashcards, setFlashcards] = useState([]);
 
   useEffect(() => {
     fetch("/decks")
@@ -25,22 +24,12 @@ function Home( props ) {
     window.location.reload();
   }
 
-  function showFlashcards(deck) {
-    fetch(`/decks/${deck}`, {
-      method: "GET"
-    })
-    .then((r) => r.json())
-    .then(data => {
-      console.log(data);
-    })
-  }
 
-  function setDeckID(id) {
-    props.clickedDeck(id);
-    // console.log("deck id in home.js", id)
+  function handleFlashcards(cards) {
+    props.handleFlashcards(cards);
+    // console.log("flashcards in home.js", cards)
   }
   
-  console.log(decks);
   return (
     <div>
       <DivStyle>
@@ -55,8 +44,7 @@ function Home( props ) {
             key={item.id} 
             deck={item} 
             deckToDelete={deckToDelete} 
-            showFlashcards={showFlashcards}
-            setDeckID={setDeckID}
+            handleFlashcards={handleFlashcards}
           />
           </>
         ))

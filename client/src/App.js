@@ -15,6 +15,7 @@ import UserSetting from "./components/pages/settings/UserSetting";
 function App() {
   const [user, setUser] = useState(null);
   const [deckID, setDeckID] = useState('');
+  const [flashcards, setFlashcards] = useState([]);
 
   useEffect(() => {
     fetch ("/me")
@@ -27,9 +28,10 @@ function App() {
 
   if (!user) return <CheckUser onLogin={setUser} />
 
-  function clickedDeck(id) {
-    setDeckID(id);
-    // console.log("deck id in app.js", id);
+  function handleFlashcards(cards) {
+    setFlashcards(cards);
+    // setDeckID(id);
+    // console.log("flashcards in app.js", cards);
   }
 
   return (
@@ -38,12 +40,12 @@ function App() {
         <Topbar key={user.id} user={user} setUser={setUser}/>
         <Routes>
           <Route path='/user/settings' element={<UserSetting key={user.id} user={user}/>} />
-          <Route path='/viewdeck' element={ <Flashcard viewedDeck={deckID}/> } />
+          <Route path='/viewdeck' element={ <Flashcard key={flashcards.id} viewFlashcards={flashcards} /> } />
           <Route path='/create/card' element={ <NewCard /> } />
           <Route path='/create/deck' element={ <NewDeck /> } />
           <Route path='/update' element={ <Discover /> } />
           <Route path='/create' element={ <Create /> } />
-          <Route path='/' element={ <Home clickedDeck={clickedDeck}/> } />
+          <Route path='/' element={ <Home handleFlashcards={handleFlashcards}/> } />
         </Routes>
       </BrowserRouter>
     </div>

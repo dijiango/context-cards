@@ -18,6 +18,7 @@ export const PTag = styled.h3`
     margin-Left: 50px;
     font-style: italic;
     font-weight: normal;
+    font-family: Brush Script MT, cursive;
 `
 export const List = styled.ul`
     list-style-type: none;
@@ -30,4 +31,16 @@ export const Detail = styled.h1`
     color: silver;
     font-size: 30px;
 `
-
+export const MenuText = styled.h2`
+    font-weight: normal;
+    font-size: 20px;
+    font-family: Brush Script MT, cursive;
+`
+export const MenuHeader = styled.h1`
+    text-align: center;
+    align-items: center;
+    font-family: Brush Script MT, cursive;
+    color: #e2d5f2;
+    font-size: 25px;
+    margin: 5px auto;
+`

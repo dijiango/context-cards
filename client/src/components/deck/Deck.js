@@ -6,16 +6,50 @@ import AppsIcon from '@mui/icons-material/Apps';
 import { useNavigate } from 'react-router-dom';
 import DeckMenu from './DeckMenu';
 
+const deckTitleStyle = {
+    fontFamily: 'Brush Script MT, cursive',
+    margin:'auto 25px'
+}
 
+const buttonStyle ={
+    margin:'auto',
+    padding:'10px',
+    fontFamily: 'Brush Script MT, cursive',
+    backgroundColor:'#4b3c73',
+    '&:hover': {
+        backgroundColor:'#5c33cc'}    
+}
 
 function Deck( props ) {
     const[deckID, setDeckID] = useState();
     const [isOpen, setIsOpen] = useState(false);
+    const [flashcards, setFlashcards] = useState([]);
     const navigate = useNavigate();
 
     function handleClick(id) {
-       props.setDeckID(id);
+        
+       fetch(`/decks/${id}`)
+        .then((r) => {
+        if (r.ok) {
+            r.json().then((cards) => {
+            setFlashcards(cards.flashcards);
+            });
+        }
+        });
+        props.handleFlashcards(flashcards);
+        // console.log("Deck id", id);
+        // console.log("Flashcard array", flashcards);
     }
+
+    function handleDelete(deck) {
+        if (deck) {
+            fetch(`/decks/${deck}`, {
+            method: "DELETE"
+            })
+            .then((r) => r.json())
+            }
+    }
+        
 
     function handleDelete(deck) {
         props.deckToDelete(deck);
@@ -32,6 +66,8 @@ function Deck( props ) {
         {
         isOpen && <DeckMenu
             handleClose={toggleMenu}
+            handleDelete={handleDelete}
+            currentDeck={props.deck.id}
         />
         }
         <Stack spacing={2} alignItems='center'>
@@ -40,7 +76,7 @@ function Deck( props ) {
                     <Paper elevation={2} sx={{padding:"20px"}}>
                         <DivStyle>
                             <img src={DeckIcon} alt='Deck Icon' height={50} />
-                            <h1 style={{margin:'auto 25px'}}>{props.deck.subject}</h1>
+                            <h1 style={deckTitleStyle}>{props.deck.subject}</h1>
                         </DivStyle>
                             <PTag>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
@@ -58,8 +94,8 @@ function Deck( props ) {
                                     </span>
                                     <DivStyle style={{marginLeft:'100px'}}>
 
-                                        <Button onClick={() => {handleClick(props.deck.id); navigate(`/viewdeck`)}} variant='contained' sx={{margin:'auto', padding:'10px', backgroundColor:'#4b3c73', '&:hover': {backgroundColor:'#5c33cc'}}}>Review Deck</Button>
-                                        <IconButton onClick={toggleMenu} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
+                                        <Button onClick={() => {handleClick(props.deck.id); navigate('/viewdeck')}} variant='contained' sx={buttonStyle} >Review Deck</Button>
+                                        <IconButton onClick={() => {toggleMenu(); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
                                         {/* Handle delete icon */}
                                         {/* <IconButton onClick={() => {handleDelete(props.deck.id)}} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}></IconButton> */}
                                             <AppsIcon />

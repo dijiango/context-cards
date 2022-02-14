@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ClearIcon from '@mui/icons-material/Clear';
-import { IconButton, Paper } from '@mui/material';
-import { DivStyle,TitleBar } from './Deck.styled';
+import { Grid, IconButton, Paper } from '@mui/material';
+import { DivStyle,MenuHeader,MenuText,TitleBar } from './Deck.styled';
 import { MenuBox, PopupBox } from '../Popup.styled';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PageviewIcon from '@mui/icons-material/Pageview';
@@ -14,14 +14,16 @@ const menuHeaderStyle = {
 }
 
 const menuBodyStyle = {
-
+  textAlign: 'center',
+  margin: '20px'
 }
 
 const rightBarStyle = {
-  textAlign:'right'
+  textAlign: 'right'
 }
 
 const leftBarStyle = {
+
 }
 
 const iconStyle = {
@@ -30,21 +32,43 @@ const iconStyle = {
 }
 
 function DeckMenu( props ) {
+  const [isDelete, setIsDelete] = useState(false);
+
+  function deleteClick() {
+    setIsDelete(!isDelete);
+    props.handleDelete(isDelete);
+  }
+
   return (
     <PopupBox>
       <MenuBox>
         <Paper elevation={1}>
           <DivStyle style={menuHeaderStyle}>
-            <TitleBar style={leftBarStyle}></TitleBar>
+            <TitleBar style={leftBarStyle}><MenuHeader>What's next?</MenuHeader></TitleBar>
             <TitleBar style={rightBarStyle}>
               <IconButton onClick={props.handleClose}><ClearIcon sx={iconStyle} /></IconButton>
             </TitleBar>
           </DivStyle>
           <DivStyle style={menuBodyStyle}>
-            <PageviewIcon color='disabled'/>
-            <QuizIcon color='disabled'/>
-            <VisibilityIcon color='disabled'/>
-            <DeleteIcon color='disabled'/>
+            <Grid container spacing={3}>
+              <Grid item sm={4}>
+                <DeleteIcon onClick={() => deleteClick()} color='disabled' fontSize='large'/>
+                <MenuText>Delete</MenuText>
+              </Grid>
+              <Grid item sm={4}>
+                <VisibilityIcon color='disabled' fontSize='large'/>
+                <MenuText>Public</MenuText>
+              </Grid>
+              <Grid item sm={4}>
+                <QuizIcon color='disabled' fontSize='large'/>
+                <MenuText>Quiz Mode</MenuText>
+              </Grid>
+              
+            </Grid>
+            
+            
+            
+            
           </DivStyle>
         </Paper>
       </MenuBox>
