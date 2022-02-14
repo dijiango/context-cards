@@ -1,5 +1,5 @@
 import { Paper, Stack, Box, IconButton, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LeftBar, DivStyle, PTag, List, Detail } from './Deck.styled';
 import DeckIcon from '../images/deckicon.png';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -26,9 +26,8 @@ function Deck( props ) {
     const [flashcards, setFlashcards] = useState([]);
     const navigate = useNavigate();
 
-    function handleClick(id) {
-        
-       fetch(`/decks/${id}`)
+    useEffect(()=>{
+        fetch(`/decks/${props.deck.id}`)
         .then((r) => {
         if (r.ok) {
             r.json().then((cards) => {
@@ -36,10 +35,14 @@ function Deck( props ) {
             });
         }
         });
-        props.handleFlashcards(flashcards);
+    }, []);
+
+    
+    function handleClick(id) {
+        props.handleDeckId(id);
         // console.log("Deck id", id);
-        // console.log("Flashcard array", flashcards);
     }
+    console.log("Flashcard array", flashcards);
 
     function handleDelete(deck) {
         if (deck) {
@@ -82,7 +85,7 @@ function Deck( props ) {
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
                                     <span >
                                         <List>
-                                            <Detail>#</Detail>
+                                            <Detail>{flashcards.length}</Detail>
                                             <li>total cards</li>
                                         </List>
                                     </span>
@@ -94,7 +97,7 @@ function Deck( props ) {
                                     </span>
                                     <DivStyle style={{marginLeft:'100px'}}>
 
-                                        <Button onClick={() => {handleClick(props.deck.id); navigate('/viewdeck')}} variant='contained' sx={buttonStyle} >Review Deck</Button>
+                                        <Button onClick={() => {handleClick(props.deck.id); navigate('/viewdeck');}} variant='contained' sx={buttonStyle} >Review Deck</Button>
                                         <IconButton onClick={() => {toggleMenu(); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
                                         {/* Handle delete icon */}
                                         {/* <IconButton onClick={() => {handleDelete(props.deck.id)}} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}></IconButton> */}

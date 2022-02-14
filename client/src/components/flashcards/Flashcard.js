@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CardContainer, CarouselWrapper, Meaning, Term,  } from './Flashcard.styled';
+import { CardContainer, CarouselWrapper, Hint, Meaning, Term,  } from './Flashcard.styled';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import { Stack, Paper } from '@mui/material';
 
@@ -18,7 +18,7 @@ const FlippyStyle = {
   width: '1000px',
   height: '600px',
   textAlign: 'center',
-  fontFamily: 'sans-serif',
+  fontFamily: 'Brush Script MT, cursive',
   fontSize: '30px',
   justifyContent: 'center'
 }
@@ -34,9 +34,14 @@ const ArrowAnimated = {
 }
 
 const CardPreview = {
+  color: '#5c33cc',
+  fontFamily: 'Brush Script MT, cursive',
+  overflow: 'hidden',
   padding: '10px',
-  height: '60px',
-  width: '100px',
+  minHeight: '120px',
+  minWidth: '200px',
+  maxHeight: '120px',
+  maxWidth: '200px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -46,10 +51,9 @@ const CardPreview = {
 }
 
 function Flashcard( props ) {
-  const[flashcards, setFlashcards] = useState([]);
   const [currentCard, setCurrentCard] = useState(0);
 
-  console.log("flashcard array", props.viewFlashcards);
+  console.log("flashcard array", props.flashcards);
   // useEffect(()=>{
   //   fetch(`/decks/${props.viewedDeck}`)
   //   .then((r) => {
@@ -66,22 +70,22 @@ function Flashcard( props ) {
 
   function previousCard(current) {
     console.log("previous card");
-    // if (current == 0) {
-    //   setCurrentCard(flashcards.length);
-    // } else {
-    //   setCurrentCard(current -= 1)
-    // }
-    console.log(currentCard);
+    if (current == 0) {
+      setCurrentCard(props.flashcards.length);
+    } else {
+      setCurrentCard(current -= 1)
+    }
+    // console.log(currentCard);
   }
 
   function nextCard(current) {
     console.log("next card");
-    // if (current == flashcards.length) {
-    //   setCurrentCard(0);
-    // } else {
-    //   setCurrentCard(current += 1);
-    // }
-    console.log(currentCard);
+    if (current == props.flashcards.length) {
+      setCurrentCard(0);
+    } else {
+      setCurrentCard(current += 1);
+    }
+    // console.log(currentCard);
   }
 
   // console.log(flashcards);
@@ -93,12 +97,12 @@ function Flashcard( props ) {
 
       <Flippy style={FlippyStyle}>
           <FrontSide style={CardFace}>
-            {/* <Term>{flashcards[currentCard].term}</Term> */}
-            <span>Click to reveal answer!</span>
+            <Term>{props.flashcards[currentCard].term}</Term>
+            <Hint>Click to reveal answer!</Hint>
           </FrontSide>
           <BackSide style={CardFace}>
-            {/* <Meaning>{flashcards[currentCard].meaning}</Meaning> */}
-            <span>Click to see what this term is!</span>
+            <Meaning>{props.flashcards[currentCard].meaning}</Meaning>
+            <Hint>Click to see what this term is!</Hint>
           </BackSide>
       </Flippy>
 
@@ -109,7 +113,7 @@ function Flashcard( props ) {
     <CarouselWrapper>
       <Stack direction="row" spacing={2} justifyContent='center'>
         {
-          flashcards.map((card) => <Paper sx={CardPreview}>{card.term}</Paper>)
+          props.flashcards.map((card) => <Paper sx={CardPreview}>{card.term}</Paper>)
         }
       </Stack>
     </CarouselWrapper>

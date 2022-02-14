@@ -66,7 +66,7 @@ Deck.create!([
 puts "Seeding flashcards"
 
 5.times do
-    Flashcard.create!(term: Faker::Placeholdit.image(size: '20x20', format: 'jpg'), meaning: Faker::Lorem.sentence, deck_id: rand(1..4))
+    Flashcard.create!(term: Faker::University.name, meaning: Faker::Lorem.sentence, deck_id: rand(1..4))
 end
 
 5.times do
@@ -110,8 +110,8 @@ Flashcard.create!([
         deck_id: 5
     },
     {
-        term: "Dad, did you get a haircut?",
-        meaning: "No, I got them all cut!",
+        term: "Why did the fisherman cross the road",
+        meaning: "Just for the halibut",
         deck_id: 5
     }
 ])

@@ -28,11 +28,19 @@ function App() {
 
   if (!user) return <CheckUser onLogin={setUser} />
 
-  function handleFlashcards(cards) {
-    setFlashcards(cards);
-    // setDeckID(id);
-    // console.log("flashcards in app.js", cards);
+  function handleDeckId(id) {
+    fetch(`/decks/${id}`)
+      .then((r) => {
+      if (r.ok) {
+            r.json().then((deck) => {
+            setFlashcards(deck.flashcards);
+            });
+        }
+    });
+    console.log("deck id in app.js", id);
   }
+
+  console.log("flashcards in app.js", flashcards);
 
   return (
     <div>
@@ -40,12 +48,12 @@ function App() {
         <Topbar key={user.id} user={user} setUser={setUser}/>
         <Routes>
           <Route path='/user/settings' element={<UserSetting key={user.id} user={user}/>} />
-          <Route path='/viewdeck' element={ <Flashcard key={flashcards.id} viewFlashcards={flashcards} /> } />
+          <Route path='/viewdeck' element={ <Flashcard key={flashcards.id} flashcards={flashcards} /> } />
           <Route path='/create/card' element={ <NewCard /> } />
           <Route path='/create/deck' element={ <NewDeck /> } />
           <Route path='/update' element={ <Discover /> } />
           <Route path='/create' element={ <Create /> } />
-          <Route path='/' element={ <Home handleFlashcards={handleFlashcards}/> } />
+          <Route path='/' element={ <Home handleDeckId={handleDeckId}/> } />
         </Routes>
       </BrowserRouter>
     </div>
