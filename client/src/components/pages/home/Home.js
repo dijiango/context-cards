@@ -25,10 +25,10 @@ function Home( props ) {
   }
 
 
-  // function handleDeckId(cards) {
-  //   props.handleDeckId(cards);
-  //   // console.log("flashcards in home.js", cards)
-  // }
+  function handleDeckId(id) {
+    props.handleDeckId(id);
+    // console.log("flashcards in home.js", cards)
+  }
   
   return (
     <div>
@@ -44,7 +44,7 @@ function Home( props ) {
             key={item.id} 
             deck={item} 
             deckToDelete={deckToDelete} 
-            // handleDeckId={handleDeckId}
+            handleDeckId={handleDeckId}
           />
           </>
         ))

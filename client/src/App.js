@@ -43,16 +43,16 @@ function App() {
     // });
   }
 
-  useEffect(() => {
-    fetch(`/decks/${deckID}`).then((r) => {
-      setIsLoading(false);
-      if (r.ok) {
-        r.json().then((deck) => {
-          setFlashcards(deck.flashcards)
-        })
-      };
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`/decks/${deckID}`).then((r) => {
+  //     setIsLoading(false);
+  //     if (r.ok) {
+  //       r.json().then((deck) => {
+  //         setFlashcards(deck.flashcards)
+  //       })
+  //     };
+  //   });
+  // }, []);
 
   console.log("flashcards in app.js", flashcards);
 
@@ -62,7 +62,7 @@ function App() {
         <Topbar key={user.id} user={user} setUser={setUser}/>
         <Routes>
           <Route path='/user/settings' element={<UserSetting key={user.id} user={user}/>} />
-          <Route path='/viewdeck' element={ <Flashcard key={flashcards.id} flashcards={flashcards} /> } />
+          <Route path='/deck/:deckID' element={ <Flashcard key={flashcards.id} flashcards={flashcards} /> } />
           <Route path='/create/card' element={ <NewCard /> } />
           <Route path='/create/deck' element={ <NewDeck /> } />
           <Route path='/update' element={ <Discover /> } />
