@@ -5,7 +5,6 @@ import { Stack, Paper } from '@mui/material';
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useParams } from 'react-router-dom';
 
 const CardFace = {
   backgroundColor:'white',
@@ -13,7 +12,7 @@ const CardFace = {
   alignItems: 'center',
   justifyContent: 'center',
   flexDirection: 'column'
-}
+} 
 
 const FlippyStyle = {
   width: '1000px',
@@ -53,20 +52,18 @@ const CardPreview = {
 
 function Flashcard( props ) {
   const [currentCard, setCurrentCard] = useState(0);
-  const [flashcards, setFlashcards] = useState([]);
 
-  const { deckID } = useParams();
-
-  useEffect(()=>{
-    fetch(`/decks/${deckID}`)
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((cards) => {
-          setFlashcards(cards.flashcards);
-        });
-      }
-    });
-  }, []);
+  console.log("flashcard array", props.flashcards);
+  // useEffect(()=>{
+  //   fetch(`/decks/${props.viewedDeck}`)
+  //   .then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((cards) => {
+  //         setFlashcards(cards.flashcards);
+  //       });
+  //     }
+  //   });
+  // }, []);
 
   // console.log("Flashcards", flashcards.length);
   // console.log("Flashcard", flashcards[currentCard].term);
@@ -74,7 +71,7 @@ function Flashcard( props ) {
   function previousCard(current) {
     console.log("previous card");
     if (current == 0) {
-      setCurrentCard(flashcards.length);
+      setCurrentCard(props.flashcards.length);
     } else {
       setCurrentCard(current -= 1)
     }
@@ -83,7 +80,7 @@ function Flashcard( props ) {
 
   function nextCard(current) {
     console.log("next card");
-    if (current == flashcards.length) {
+    if (current == props.flashcards.length) {
       setCurrentCard(0);
     } else {
       setCurrentCard(current += 1);
@@ -100,11 +97,11 @@ function Flashcard( props ) {
 
       <Flippy style={FlippyStyle}>
           <FrontSide style={CardFace}>
-            <Term>{flashcards[currentCard].term}</Term>
+            <Term>{props.flashcards[currentCard].term}</Term>
             <Hint>Click to reveal answer!</Hint>
           </FrontSide>
           <BackSide style={CardFace}>
-            <Meaning>{flashcards[currentCard].meaning}</Meaning>
+            <Meaning>{props.flashcards[currentCard].meaning}</Meaning>
             <Hint>Click to see what this term is!</Hint>
           </BackSide>
       </Flippy>
