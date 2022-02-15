@@ -29,6 +29,7 @@ function Signup({ onLogin }) {
     function handleSubmit(e){
         e.preventDefault();
         setErrors([]);
+        setIsLoading(true);
         fetch("/signup", {
             method: "POST",
             headers: {

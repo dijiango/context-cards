@@ -28,7 +28,6 @@ export const Hint = styled.span`
 
 export const CarouselWrapper = styled.div`
     /* background-color: lightgray; */
-    will-change: transform;
     overflow-x: scroll;
     text-align: center;
     margin: -50px 50px 50px;

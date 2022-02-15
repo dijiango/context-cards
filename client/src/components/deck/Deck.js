@@ -38,10 +38,10 @@ function Deck( props ) {
     }, []);
 
     
-    function handleClick(id) {
-        props.handleDeckId(id);
-        // console.log("Deck id", id);
-    }
+    // function handleClick(id) {
+    //     props.handleDeckId(id);
+    //     // console.log("Deck id", id);
+    // }
     console.log("Flashcard array", flashcards);
 
     function handleDelete(deck) {
@@ -97,7 +97,8 @@ function Deck( props ) {
                                     </span>
                                     <DivStyle style={{marginLeft:'100px'}}>
 
-                                        <Button onClick={() => {handleClick(props.deck.id); navigate('/viewdeck');}} variant='contained' sx={buttonStyle} >Review Deck</Button>
+                                        <Button onClick={() => {console.log(props.deck.id); navigate(`/deck/${props.deck.id}`);}} variant='contained' sx={buttonStyle} >Review Deck</Button>
+                                        {/* <Button onClick={() => {handleClick(props.deck.id); navigate(`/deck/${props.deck.id}`);}} variant='contained' sx={buttonStyle} >Review Deck</Button> */}
                                         <IconButton onClick={() => {toggleMenu(); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
                                         {/* Handle delete icon */}
                                         {/* <IconButton onClick={() => {handleDelete(props.deck.id)}} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}></IconButton> */}

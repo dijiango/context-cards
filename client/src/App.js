@@ -16,6 +16,8 @@ function App() {
   const [user, setUser] = useState(null);
   const [deckID, setDeckID] = useState('');
   const [flashcards, setFlashcards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState("waiting...");
 
   useEffect(() => {
     fetch ("/me")
@@ -29,16 +31,28 @@ function App() {
   if (!user) return <CheckUser onLogin={setUser} />
 
   function handleDeckId(id) {
-    fetch(`/decks/${id}`)
-      .then((r) => {
-      if (r.ok) {
-            r.json().then((deck) => {
-            setFlashcards(deck.flashcards);
-            });
-        }
-    });
-    console.log("deck id in app.js", id);
+    setDeckID(id);
+    // fetch(`/decks/${id}`)
+    //   .then((r) => {
+    //   setIsLoading(false);
+    //   if (r.ok) {
+    //         r.json().then((deck) => {
+    //         setFlashcards(deck.flashcards);
+    //         });
+    //     }
+    // });
   }
+
+  useEffect(() => {
+    fetch(`/decks/${deckID}`).then((r) => {
+      setIsLoading(false);
+      if (r.ok) {
+        r.json().then((deck) => {
+          setFlashcards(deck.flashcards)
+        })
+      };
+    });
+  }, []);
 
   console.log("flashcards in app.js", flashcards);
 

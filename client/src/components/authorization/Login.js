@@ -27,6 +27,7 @@ function Login({ onLogin }) {
   
     function handleSubmit(e) {
       e.preventDefault();
+      setIsLoading(true);
       fetch("/login", {
         method: "POST",
         headers: {
