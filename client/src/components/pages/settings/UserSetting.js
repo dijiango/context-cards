@@ -40,8 +40,8 @@ function UserSetting( props ) {
   return (
     <div>
         UserSetting
-        <Paper sx={{margin: '50px'}}>
         <img src={props.user.image} alt='Profile Picture' style={imageStyle}/>
+        <Paper sx={{margin: '50px'}}>
         <form onSubmit={handleSubmit}>
         <Stack spacing={5} sx={{padding:'50px 75px'}}>
         <TextField
