@@ -39,6 +39,22 @@ function Deck( props ) {
         });
     }, []);
 
+    function changePublicView(id) {
+        console.log(id);
+        setIsPublic(!isPublic);
+        console.log(isPublic);
+        fetch(`/decks/${id}`, {
+        method: "PATCH",
+        headers:  {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            public: isPublic
+        }),
+        })
+        .then(r => r.json())
+    }
+
     function toggleMenu(id) {
         setDeckID(id);
         setIsOpen(!isOpen);
@@ -53,6 +69,7 @@ function Deck( props ) {
             getDecks={props.getDecks}
             deckSummary={props.deck.summary}
             isPublic={isPublic}
+            changePublicView={changePublicView}
         />
         }
         <Stack spacing={2} alignItems='center'>  

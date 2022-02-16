@@ -43,31 +43,35 @@ function DeckMenu( props ) {
     })
   }
 
-  function changePublicTrue() {
-      fetch(`/decks/${props.deckID}`, {
-      method: "PATCH",
-      headers:  {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-          public: 'true'
-      }),
-    })
-      .then(r => r.json())
+  function changePublicView(id) {
+    props.changePublicView(id);
   }
 
-  function changePublicFalse() {
-    fetch(`/decks/${props.deckID}`, {
-    method: "PATCH",
-    headers:  {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        public: 'false'
-    }),
-    })
-    .then(r => r.json())
-}
+//   function changePublicTrue() {
+//       fetch(`/decks/${props.deckID}`, {
+//       method: "PATCH",
+//       headers:  {
+//           "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//           public: 'true'
+//       }),
+//     })
+//       .then(r => r.json())
+//   }
+
+//   function changePublicFalse() {
+//     fetch(`/decks/${props.deckID}`, {
+//     method: "PATCH",
+//     headers:  {
+//         "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//         public: 'false'
+//     }),
+//     })
+//     .then(r => r.json())
+// }
 
   return (
     <PopupBox>
@@ -88,9 +92,9 @@ function DeckMenu( props ) {
                 <MenuText>Delete</MenuText>
               </Grid>
               <Grid item sm={4}>
-              <IconButton>
+              <IconButton onClick={()=> changePublicView(props.deckID)}>
                 {
-                  props.isPublic == "true" ? <VisibilityIcon onClick={()=> changePublicTrue()} color='disabled' fontSize='large'/> :  <VisibilityOffIcon onClick={()=> changePublicFalse()} color='disabled' fontSize='large'/>
+                  props.isPublic ? <VisibilityIcon  color='disabled' fontSize='large'/> :  <VisibilityOffIcon color='disabled' fontSize='large'/>
                 }               
               </IconButton>
                 <MenuText>Public</MenuText>

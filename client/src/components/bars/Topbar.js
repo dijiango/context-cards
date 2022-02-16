@@ -88,7 +88,6 @@ function Topbar({ user, setUser }) {
                     </Button>
                     <IconButton href='/user/settings'>
                         {user.image ?  <img src={user.image} alt='User Pic' style={picStyle}/> : <AccountCircleIcon style={iconStyle} />}
-                            {/* <NavLink to="/"/> */}
                     </IconButton>
                 </div>
             </TopbarText>
