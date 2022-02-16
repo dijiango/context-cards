@@ -24,6 +24,7 @@ function Deck( props ) {
     const [deckID, setDeckID] = useState();
     const [isOpen, setIsOpen] = useState(false);
     const [flashcards, setFlashcards] = useState([]);
+    const [isPublic, setIsPublic] = useState(false);
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -32,6 +33,7 @@ function Deck( props ) {
         if (r.ok) {
             r.json().then((deck) => {
             setFlashcards(deck.flashcards);
+            setIsPublic(deck.public);
             });
         }
         });
@@ -50,9 +52,10 @@ function Deck( props ) {
             deckID={deckID}
             getDecks={props.getDecks}
             deckSummary={props.deck.summary}
+            isPublic={isPublic}
         />
         }
-        <Stack spacing={2} alignItems='center'>
+        <Stack spacing={2} alignItems='center'>  
             <LeftBar>
                 <DivStyle>
                     <Paper elevation={2} sx={{padding:"20px"}}>

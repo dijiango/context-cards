@@ -25,8 +25,9 @@ function Home( props ) {
   return (
     <div>
       <DivStyle>
-        <TitleBar>First bar</TitleBar>
-        <TitleBar>Second bar</TitleBar>
+        Your Decks
+        {/* <TitleBar>First bar</TitleBar> */}
+        {/* <TitleBar>Second bar</TitleBar> */}
       </DivStyle>
       
       {decks.length > 0 ? (
