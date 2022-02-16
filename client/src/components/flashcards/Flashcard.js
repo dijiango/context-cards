@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CardContainer, CarouselWrapper, Hint, Meaning, Term,  } from './Flashcard.styled';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
-import { Stack, Paper } from '@mui/material';
+import { Stack, Paper, IconButton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -38,6 +38,7 @@ const CardPreview = {
   color: '#5c33cc',
   fontFamily: 'Brush Script MT, cursive',
   overflow: 'hidden',
+  fontSize: '20px',
   padding: '10px',
   minHeight: '120px',
   minWidth: '200px',
@@ -87,6 +88,11 @@ function Flashcard( props ) {
     }
   }
 
+  function chooseCard(id) {
+    console.log(id);
+    // setCurrentCard(id);
+  }
+
   return (flashcards && flashcards.length > 0) ? (
   <div>
     <CardContainer>
@@ -110,7 +116,7 @@ function Flashcard( props ) {
     <CarouselWrapper>
       <Stack direction="row" spacing={2} justifyContent='center'>
         {
-          flashcards.map((card) => <Paper sx={CardPreview}>{card.term}</Paper>)
+          flashcards.map((card) => <IconButton onClick={()=> chooseCard(card.id)}><Paper sx={CardPreview}>{card.term}</Paper></IconButton>)
         }
       </Stack>
     </CarouselWrapper>
