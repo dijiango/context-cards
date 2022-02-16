@@ -32,27 +32,20 @@ function App() {
 
   function handleDeckId(id) {
     setDeckID(id);
-    // fetch(`/decks/${id}`)
-    //   .then((r) => {
-    //   setIsLoading(false);
-    //   if (r.ok) {
-    //         r.json().then((deck) => {
-    //         setFlashcards(deck.flashcards);
-    //         });
-    //     }
-    // });
+  //   fetch(`/decks/${id}`)
+  //     .then((r) => {
+  //     setIsLoading(false);
+  //     if (r.ok) {
+  //           r.json().then((deck) => {
+  //           setFlashcards(deck.flashcards);
+  //           });
+  //       }
+  //   });
   }
 
   // useEffect(() => {
-  //   fetch(`/decks/${deckID}`).then((r) => {
-  //     setIsLoading(false);
-  //     if (r.ok) {
-  //       r.json().then((deck) => {
-  //         setFlashcards(deck.flashcards)
-  //       })
-  //     };
-  //   });
-  // }, []);
+  //   handleDeckId(id)
+  // }, [id]);
 
   console.log("flashcards in app.js", flashcards);
 
@@ -67,7 +60,7 @@ function App() {
           <Route path='/create/deck' element={ <NewDeck /> } />
           <Route path='/update' element={ <Discover /> } />
           <Route path='/create' element={ <Create /> } />
-          <Route path='/' element={ <Home handleDeckId={handleDeckId}/> } />
+          <Route path='/' element={ <Home /> } />
         </Routes>
       </BrowserRouter>
     </div>

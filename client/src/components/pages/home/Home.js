@@ -7,22 +7,14 @@ import { DivStyle, TitleBar } from './Home.styled';
 function Home( props ) {
   const [decks, setDecks] = useState([]);
 
-  useEffect(() => {
+  function getDecks() {
     fetch("/decks")
     .then(r => r.json())
     .then(data => setDecks(data))
-  }, [])
-
-  function deckToDelete(deck) {
-    fetch(`/decks/${deck}`, {
-        method: "DELETE"
-    })
-    .then((r) => {
-      decks.filter((item) => item !== deck)
-    })
-
-    window.location.reload();
   }
+  useEffect(() => {
+    getDecks();
+  }, [])
 
 
   function handleDeckId(id) {
@@ -42,9 +34,8 @@ function Home( props ) {
           <>
           <Deck 
             key={item.id} 
-            deck={item} 
-            deckToDelete={deckToDelete} 
-            handleDeckId={handleDeckId}
+            deck={item}
+            getDecks={getDecks}
           />
           </>
         ))

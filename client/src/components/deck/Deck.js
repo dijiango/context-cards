@@ -21,7 +21,7 @@ const buttonStyle ={
 }
 
 function Deck( props ) {
-    const[deckID, setDeckID] = useState();
+    const [deckID, setDeckID] = useState();
     const [isOpen, setIsOpen] = useState(false);
     const [flashcards, setFlashcards] = useState([]);
     const navigate = useNavigate();
@@ -37,38 +37,18 @@ function Deck( props ) {
         });
     }, []);
 
-    
-    function handleClick(id) {
-        props.handleDeckId(id);
-    }
-
-    function handleDelete(deck) {
-        if (deck) {
-            fetch(`/decks/${deck}`, {
-            method: "DELETE"
-            })
-            .then((r) => r.json())
-            }
-    }
-        
-
-    function handleDelete(deck) {
-        props.deckToDelete(deck);
-    }
-
-    function toggleMenu() {
+    function toggleMenu(id) {
+        setDeckID(id);
         setIsOpen(!isOpen);
     }
-
-    
 
   return (
     <div>
         {
         isOpen && <DeckMenu
             handleClose={toggleMenu}
-            handleDelete={handleDelete}
-            currentDeck={props.deck.id}
+            deckID={deckID}
+            getDecks={props.getDecks}
         />
         }
         <Stack spacing={2} alignItems='center'>
@@ -95,8 +75,8 @@ function Deck( props ) {
                                     </span>
                                     <DivStyle style={{marginLeft:'100px'}}>
 
-                                        <Button onClick={() => {console.log(props.deck.id); navigate(`/deck/${props.deck.id}`);}} variant='contained' sx={buttonStyle} >Review Deck</Button>
-                                        <IconButton onClick={() => {toggleMenu(); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
+                                        <Button onClick={() => {navigate(`/deck/${props.deck.id}`);}} variant='contained' sx={buttonStyle} >Review Deck</Button>
+                                        <IconButton onClick={() => {toggleMenu(props.deck.id); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
                                         {/* Handle delete icon */}
                                         {/* <IconButton onClick={() => {handleDelete(props.deck.id)}} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}></IconButton> */}
                                             <AppsIcon />

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { CardContainer, CarouselWrapper, Hint, Meaning, Term,  } from './Flashcard.styled';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import { Stack, Paper } from '@mui/material';
-
+import { useParams } from 'react-router-dom';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 
 const CardFace = {
   backgroundColor:'white',
@@ -51,58 +52,54 @@ const CardPreview = {
 }
 
 function Flashcard( props ) {
+  const { deckID } = useParams();
+  const [flashcards, setFlashcards] = useState([]);
   const [currentCard, setCurrentCard] = useState(0);
 
-  console.log("flashcard array", props.flashcards);
-  // useEffect(()=>{
-  //   fetch(`/decks/${props.viewedDeck}`)
-  //   .then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((cards) => {
-  //         setFlashcards(cards.flashcards);
-  //       });
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    getFlashcards();
+  }, [deckID])
 
-  // console.log("Flashcards", flashcards.length);
-  // console.log("Flashcard", flashcards[currentCard].term);
+  function getFlashcards() {
+    fetch(`/decks/${deckID}`)
+    .then(r => r.json())
+    .then((deck) => {
+      console.log("the deck data", deck);
+      if (deck) {       
+        setFlashcards(deck.flashcards);
+      }
+    })
+  }
 
   function previousCard(current) {
-    console.log("previous card");
-    if (current == 0) {
-      setCurrentCard(props.flashcards.length);
+    if (current === 0) {
+      setCurrentCard(flashcards.length - 1);
     } else {
-      setCurrentCard(current -= 1)
+      setCurrentCard(current - 1)
     }
-    // console.log(currentCard);
   }
 
   function nextCard(current) {
-    console.log("next card");
-    if (current == props.flashcards.length) {
+    if (current === flashcards.length - 1) {
       setCurrentCard(0);
     } else {
-      setCurrentCard(current += 1);
+      setCurrentCard(current + 1);
     }
-    // console.log(currentCard);
   }
 
-  // console.log(flashcards);
-  return (
+  return (flashcards && flashcards.length > 0) ? (
   <div>
-    
     <CardContainer>
         <ArrowBackIosNewIcon sx={ArrowAnimated} onClick={() => previousCard(currentCard)}/> 
 
       <Flippy style={FlippyStyle}>
           <FrontSide style={CardFace}>
-            <Term>{props.flashcards[currentCard].term}</Term>
+            <Term>{flashcards[currentCard].term}</Term>
             <Hint>Click to reveal answer!</Hint>
           </FrontSide>
           <BackSide style={CardFace}>
-            <Meaning>{props.flashcards[currentCard].meaning}</Meaning>
-            <Hint>Click to see what this term is!</Hint>
+            <Meaning>{flashcards[currentCard].meaning}</Meaning>
+            <Hint>Click to see what this term is!</Hint> 
           </BackSide>
       </Flippy>
 
@@ -113,12 +110,12 @@ function Flashcard( props ) {
     <CarouselWrapper>
       <Stack direction="row" spacing={2} justifyContent='center'>
         {
-          props.flashcards.map((card) => <Paper sx={CardPreview}>{card.term}</Paper>)
+          flashcards.map((card) => <Paper sx={CardPreview}>{card.term}</Paper>)
         }
       </Stack>
     </CarouselWrapper>
   </div>
-  )
+  ): <div><h2>You haven't added any cards yet!</h2></div> 
 }
 
 export default Flashcard;

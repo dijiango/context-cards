@@ -31,12 +31,16 @@ const iconStyle = {
   fontSize: '30px'
 }
 
-function DeckMenu( props ) {
-  const [isDelete, setIsDelete] = useState(false);
 
-  function deleteClick() {
-    setIsDelete(!isDelete);
-    props.handleDelete(isDelete);
+function DeckMenu( props ) {
+
+  function handleDelete() {
+    fetch(`/decks/${props.deckID}`, {
+      method: "DELETE"
+    })
+    .then(() => {
+      props.getDecks();
+    })
   }
 
   return (
@@ -52,7 +56,7 @@ function DeckMenu( props ) {
           <DivStyle style={menuBodyStyle}>
             <Grid container spacing={3}>
               <Grid item sm={4}>
-                <DeleteIcon onClick={() => deleteClick()} color='disabled' fontSize='large'/>
+                <DeleteIcon onClick={() => handleDelete()} color='disabled' fontSize='large'/>
                 <MenuText>Delete</MenuText>
               </Grid>
               <Grid item sm={4}>
