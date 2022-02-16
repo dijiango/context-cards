@@ -76,10 +76,10 @@ function Topbar({ user, setUser }) {
                         <NavLink to="/" style={textStyle}>Home</NavLink>
                     </LeftRoutes>
                     <LeftRoutes>
-                        <NavLink to="/create" style={textStyle}>Create</NavLink>
+                        <NavLink to="/create" style={textStyle}>Add</NavLink>
                     </LeftRoutes>
                     <LeftRoutes>
-                        <NavLink to="/update" style={textStyle}>Update</NavLink>
+                        <NavLink to="/update" style={textStyle}>Discover</NavLink>
                     </LeftRoutes>
                 </div>
                 <div className='topbar-right' style={rightBar}>

@@ -34,39 +34,8 @@ function Discover() {
   }
 
   return (
-    <>
-      <Paper>
-        <form onSubmit={handleSubmit}>
-        <Stack spacing={5}>
-        <TextField
-            label="Deck Id"
-            variant='standard'
-            color='secondary'
-            onChange={(e) => setDeckId(e.target.value)}
-            value={deckId}
-        />
-        <TextField
-            label="Subject"
-            variant='standard'
-            color='secondary'
-            onChange={(e) => setSubject(e.target.value)}
-            value={subject}
-        />
-        <TextField
-            label="Summary"
-            placeholder="Give this deck a little context..."
-            variant='outlined'
-            color='secondary'
-            multiline
-            rows={4}
-            onChange={(e) => setSummary(e.target.value)}
-            value={summary}
-        />
-        </Stack>
-        <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle}>Submit</Button>
-    </form>
-    </Paper>
-    </>
+    <div>
+    </div>
 )};
 
 export default Discover;
