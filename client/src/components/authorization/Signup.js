@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Title } from './Auth.styled';
+import { Caption, Form, Title } from './Auth.styled';
 import { Container, Box, Paper, Stack, TextField, Button, IconButton, InputAdornment } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -61,7 +61,7 @@ function Signup({ onLogin }) {
         <Container component='main' maxWidth='sm'>
             <Paper elevation={3}>
                 <Box sx={ boxStyle }>
-                <Title>Sign Up</Title> 
+                <Title>Sign Up for Context</Title> 
                 <Form onSubmit={handleSubmit}>
                     <Stack spacing={5}>
                         <TextField

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Title } from './Auth.styled';
+import { AppDescription, AppName, Form, Title } from './Auth.styled';
 import { Container, Box, Paper, Stack, TextField, Button, IconButton, InputAdornment } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 
 const buttonStyle = {
     float: 'right',
@@ -61,7 +62,7 @@ function Login({ onLogin }) {
         <Container component='main' maxWidth='sm'>
         <Paper elevation={3}>
             <Box sx={boxStyle}>
-            <Title>Welcome Back!</Title> 
+            <Title>Welcome Back to Context!</Title> 
             <Form onSubmit={handleSubmit}>
                 <Stack spacing={5}>
                     <TextField

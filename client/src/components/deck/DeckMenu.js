@@ -52,9 +52,8 @@ function DeckMenu( props ) {
       body: JSON.stringify({
           public: 'true'
       }),
-  })
-  .then(r => r.json())
-
+    })
+      .then(r => r.json())
   }
 
   function changePublicFalse() {
@@ -66,8 +65,8 @@ function DeckMenu( props ) {
     body: JSON.stringify({
         public: 'false'
     }),
-})
-.then(r => r.json())
+    })
+    .then(r => r.json())
 }
 
   return (

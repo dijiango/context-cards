@@ -1,7 +1,7 @@
 import { Paper, Stack, Box, IconButton, Button } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { LeftBar, DivStyle, PTag, List, Detail } from './Deck.styled';
-import DeckIcon from '../images/deckicon.png';
+import DeckIcon from '../images/cardDeck.png';
 import AppsIcon from '@mui/icons-material/Apps';
 import { useNavigate } from 'react-router-dom';
 import DeckMenu from './DeckMenu';
@@ -12,7 +12,7 @@ const deckTitleStyle = {
 }
 
 const buttonStyle ={
-    margin:'auto',
+    margin:'auto',  
     padding:'10px',
     fontFamily: 'Brush Script MT, cursive',
     backgroundColor:'#4b3c73',
@@ -81,8 +81,6 @@ function Deck( props ) {
 
                                         <Button onClick={() => {navigate(`/deck/${props.deck.id}`);}} variant='contained' sx={buttonStyle} >Review Deck</Button>
                                         <IconButton onClick={() => {toggleMenu(props.deck.id); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
-                                        {/* Handle delete icon */}
-                                        {/* <IconButton onClick={() => {handleDelete(props.deck.id)}} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}></IconButton> */}
                                             <AppsIcon />
                                         </IconButton>
                                     </DivStyle>
