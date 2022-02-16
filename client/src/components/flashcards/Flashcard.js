@@ -78,6 +78,7 @@ function Flashcard( props ) {
     } else {
       setCurrentCard(current - 1)
     }
+    console.log(currentCard);
   }
 
   function nextCard(current) {
@@ -86,12 +87,13 @@ function Flashcard( props ) {
     } else {
       setCurrentCard(current + 1);
     }
+    console.log(currentCard);
   }
 
-  function chooseCard(id) {
-    console.log(id);
-    // setCurrentCard(id);
+  function chooseCard(index) {
+    setCurrentCard(index);
   }
+
 
   return (flashcards && flashcards.length > 0) ? (
   <div>
@@ -116,7 +118,7 @@ function Flashcard( props ) {
     <CarouselWrapper>
       <Stack direction="row" spacing={2} justifyContent='center'>
         {
-          flashcards.map((card) => <IconButton onClick={()=> chooseCard(card.id)}><Paper sx={CardPreview}>{card.term}</Paper></IconButton>)
+          flashcards.map((card, index) => <IconButton onClick={()=> chooseCard(index)}><Paper sx={CardPreview}>{card.term}</Paper></IconButton>)
         }
       </Stack>
     </CarouselWrapper>
