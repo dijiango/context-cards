@@ -93,9 +93,7 @@ function DeckMenu( props ) {
               </Grid>
               <Grid item sm={4}>
               <IconButton onClick={()=> changePublicView(props.deckID)}>
-                {
-                  props.isPublic ? <VisibilityIcon  color='disabled' fontSize='large'/> :  <VisibilityOffIcon color='disabled' fontSize='large'/>
-                }               
+                  {props.isPublic ? <VisibilityOffIcon  color='disabled' fontSize='large'/> :  <VisibilityIcon color='disabled' fontSize='large'/>}            
               </IconButton>
                 <MenuText>Public</MenuText>
               </Grid>
