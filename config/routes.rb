@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   resources :favorites
   resources :users
-  resources :decks
   resources :flashcards
-  
+  resources :decks
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
