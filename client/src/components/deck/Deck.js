@@ -30,8 +30,8 @@ function Deck( props ) {
         fetch(`/decks/${props.deck.id}`)
         .then((r) => {
         if (r.ok) {
-            r.json().then((cards) => {
-            setFlashcards(cards.flashcards);
+            r.json().then((deck) => {
+            setFlashcards(deck.flashcards);
             });
         }
         });
@@ -49,6 +49,7 @@ function Deck( props ) {
             handleClose={toggleMenu}
             deckID={deckID}
             getDecks={props.getDecks}
+            deckSummary={props.deck.summary}
         />
         }
         <Stack spacing={2} alignItems='center'>

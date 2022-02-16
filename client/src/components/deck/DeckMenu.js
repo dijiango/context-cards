@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ClearIcon from '@mui/icons-material/Clear';
 import { Grid, IconButton, Paper } from '@mui/material';
-import { DivStyle,MenuHeader,MenuText,TitleBar } from './Deck.styled';
+import { DivStyle,MenuHeader,MenuText,SummaryText,TitleBar } from './Deck.styled';
 import { MenuBox, PopupBox } from '../Popup.styled';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PageviewIcon from '@mui/icons-material/Pageview';
@@ -55,6 +55,8 @@ function DeckMenu( props ) {
           </DivStyle>
           <DivStyle style={menuBodyStyle}>
             <Grid container spacing={3}>
+              <Grid item xl={12}><MenuText>Deck Summary:</MenuText></Grid>
+              <Grid item xl={12}><SummaryText>"{props.deckSummary}"</SummaryText></Grid>
               <Grid item sm={4}>
                 <DeleteIcon onClick={() => handleDelete()} color='disabled' fontSize='large'/>
                 <MenuText>Delete</MenuText>

@@ -44,3 +44,12 @@ export const MenuHeader = styled.h1`
     font-size: 25px;
     margin: 5px auto;
 `
+
+export const SummaryText = styled.h3`
+    font-size: 20px;
+    font-weight: normal;
+    font-style: italic;
+    font-family: Brush Script MT, cursive;
+    color: #392d5980;
+    margin: -20px 10px 20px;
+`
