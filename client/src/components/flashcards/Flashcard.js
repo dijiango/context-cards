@@ -133,7 +133,7 @@ function Flashcard( props ) {
       </Stack>
     </CarouselWrapper>
   </div>
-  ): <div><h2>You haven't added any cards yet!</h2></div> 
+  ): <div><h2>You haven't added any flashcards yet!</h2></div> 
 }
 
 export default Flashcard;

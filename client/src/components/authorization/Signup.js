@@ -21,8 +21,10 @@ const boxStyle = {
 function Signup({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [email, setEmail] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     
@@ -35,7 +37,7 @@ function Signup({ onLogin }) {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({username, email, password}),
+            body: JSON.stringify({username, email, password, password_confirmation: passwordConfirmation,}),
         }).then((r) => {
             setIsLoading(false);
             if (r.ok) {
@@ -48,12 +50,21 @@ function Signup({ onLogin }) {
     }
 
     const handleClickShowPassword = () => {
-        setShowPassword(!showPassword)
+        setShowPassword(!showPassword);
+    };
+
+    const handleClickShowPasswordConfirmation = () => {
+        setShowPasswordConfirmation(!showPasswordConfirmation);
     };
 
     const handleMouseDownPassword = (e) => {
         e.preventDefault();
-        setShowPassword(!showPassword)
+        setShowPassword(!showPassword);
+    };
+
+    const handleMouseDownPasswordConfirmation = (e) => {
+        e.preventDefault();
+        setShowPasswordConfirmation(!showPasswordConfirmation);
     };
     
   return (
@@ -95,6 +106,28 @@ function Signup({ onLogin }) {
                                         onMouseDown={handleMouseDownPassword}
                                     >
                                     {showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                                )
+                            }}
+                        />
+                        <TextField
+                            label="Confirm Password"
+                            variant='standard'
+                            color='secondary'
+                            type={showPasswordConfirmation ? "text" : "password"}
+                            value={passwordConfirmation}
+                            onChange={(e) => setPasswordConfirmation(e.target.value)}
+
+                            InputProps={{
+                                endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password confirmation visibility"
+                                        onClick={handleClickShowPasswordConfirmation}
+                                        onMouseDown={handleMouseDownPasswordConfirmation}
+                                    >
+                                    {showPasswordConfirmation ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
                                 </InputAdornment>
                                 )

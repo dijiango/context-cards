@@ -35,7 +35,7 @@ function Discover() {
           ))
         ) : (
           <>
-            <h2>You haven't added any decks yet.</h2>
+            <h2>No one has added any decks yet.</h2>
           </>
         )
       }
