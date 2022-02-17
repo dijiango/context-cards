@@ -25,6 +25,12 @@ class FlashcardsController < ApplicationController
             flashcard.destroy_all
             head :no_content
         end
+
+        def add_flashcards
+            # @current_deck = Flashcard.find(deck_id: params[:id])
+            flashcard = Flashcard.create!(create_flashcard_params)
+            render json: flashcard, status: :created
+        end
     
         private
     
@@ -33,7 +39,7 @@ class FlashcardsController < ApplicationController
         end
     
         def create_flashcard_params
-            params.permit(:term, :meaning, :user_id, :deck_id).merge(interval: 1)
+            params.permit(:term, :meaning, :deck_id)
         end
     
         def update_flashcard_params

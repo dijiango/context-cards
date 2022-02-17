@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   resources :favorites
   resources :users
-  resources :flashcards
+  resources :flashcards, only: [:index, :create]
   resources :decks
 
+  post "/flashcards/:deck_id", to: "flashcards#add_flashcards"
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"

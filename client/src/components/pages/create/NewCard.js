@@ -36,8 +36,8 @@ const AddButton = {
 }
 
 function NewCard() {
-  const [frontTerm, setFrontTerm] = useState();
-  const [backMeaning, setBackMeaning] = useState();
+  const [term, setTerm] = useState();
+  const [meaning, setMeaning] = useState();
   const [deckID, setDeckID] = useState();
   const [updateDeck, setUpdateDeck] = useState("");
 
@@ -54,17 +54,17 @@ function NewCard() {
 
   function handleSubmit(e) {
       e.preventDefault();
-      fetch(`/decks/${updateDeck.id}`, {
-        method: "PATCH",
+      fetch(`/flashcards/${updateDeck.id}`, {
+        method: "POST",
         headers:  {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            frontTerm, backMeaning
+            term, meaning
         }),
     })
     .then(r => r.json())
-    .then(setFrontTerm(''), setBackMeaning(''))
+    .then(setTerm(''), setMeaning(''))
   }
 
   return( 
@@ -93,8 +93,8 @@ function NewCard() {
             sx={{width:'75%'}}
             multiline
             rows={4}
-            onChange={(e) => setFrontTerm(e.target.value)}
-            value={frontTerm}
+            onChange={(e) => setTerm(e.target.value)}
+            value={term}
           />
         </Paper>
         <Paper sx={cardStyle}>
@@ -106,8 +106,8 @@ function NewCard() {
             sx={{width:'75%'}}
             multiline
             rows={4}
-            onChange={(e) => setBackMeaning(e.target.value)}
-            value={backMeaning}
+            onChange={(e) => setMeaning(e.target.value)}
+            value={meaning}
           />
         </Paper>
         <IconButton type='submit'><AddIcon sx={AddButton}/></IconButton>
