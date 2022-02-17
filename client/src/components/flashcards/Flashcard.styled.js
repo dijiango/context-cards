@@ -1,10 +1,26 @@
 import styled from "styled-components";
 
+export const TitleText = styled.span`
+    margin: 0px 10px 0px 50px;
+    font-weight: bold;
+    color: #4b3c73;
+    font-size: 20px;
+`
+
+export const NameText = styled.span`
+    font-style: italic;
+    color: #7a6d8f;
+`
+
+export const TitleDiv = styled.div`
+    margin: 50px 30vw 0px;
+`
+
 export const CardContainer = styled.div`
     /* background-color: lightgray; */
     justify-content: center;
     align-items: center;
-    margin: 100px 100px;
+    margin: 20px 100px 100px;
     display: flex;
 `
 

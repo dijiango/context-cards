@@ -79,7 +79,7 @@ function Topbar({ user, setUser }) {
                         <NavLink to="/create" style={textStyle}>Add</NavLink>
                     </LeftRoutes>
                     <LeftRoutes>
-                        <NavLink to="/update" style={textStyle}>Discover</NavLink>
+                        <NavLink to="/discover" style={textStyle}>Discover</NavLink>
                     </LeftRoutes>
                 </div>
                 <div className='topbar-right' style={rightBar}>

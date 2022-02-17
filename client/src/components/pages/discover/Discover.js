@@ -8,31 +8,7 @@ const buttonStyle = {
 }
 
 function Discover() {
-  const [deckId, setDeckId] = useState();
-  const [subject, setSubject] = useState();
-  const [summary, setSummary] = useState();
-  const [errors, setErrors] = useState([]);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    fetch(`/decks/${deckId}`, {
-        method: "PATCH",
-        headers:  {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            subject, summary
-        }),
-    })
-    .then(r => {
-        if (r.ok) {
-            r.json().then(setDeckId(''), setSubject(''), setSummary(''))
-        } else {
-            r.json().then((err) => setErrors(err.errors));
-        }
-    })
-  }
-
+    const [decks, setDecks] = useState();
   return (
     <div>
     </div>

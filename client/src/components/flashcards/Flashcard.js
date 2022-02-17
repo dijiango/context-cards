@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CardContainer, CarouselWrapper, Hint, Meaning, Term,  } from './Flashcard.styled';
+import { CardContainer, CarouselWrapper, Hint, Meaning, NameText, Term, TitleDiv, TitleText,  } from './Flashcard.styled';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import { Stack, Paper, IconButton } from '@mui/material';
 import { useParams } from 'react-router-dom';
@@ -52,8 +52,10 @@ const CardPreview = {
   }
 }
 
+
 function Flashcard( props ) {
   const { deckID } = useParams();
+  const [deckName, setDeckName] = useState();
   const [flashcards, setFlashcards] = useState([]);
   const [currentCard, setCurrentCard] = useState(0);
 
@@ -66,7 +68,8 @@ function Flashcard( props ) {
     .then(r => r.json())
     .then((deck) => {
       console.log("the deck data", deck);
-      if (deck) {       
+      if (deck) {
+        setDeckName(deck.subject);
         setFlashcards(deck.flashcards);
       }
     })
@@ -97,6 +100,13 @@ function Flashcard( props ) {
 
   return (flashcards && flashcards.length > 0) ? (
   <div>
+    <TitleDiv>
+      <TitleText>Deck:</TitleText>
+      <NameText>{deckName}</NameText>
+
+      <TitleText>current:</TitleText>
+      <NameText>{currentCard + 1}/{flashcards.length}</NameText>
+    </TitleDiv>
     <CardContainer>
         <ArrowBackIosNewIcon sx={ArrowAnimated} onClick={() => previousCard(currentCard)}/> 
 

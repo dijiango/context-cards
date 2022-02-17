@@ -58,7 +58,7 @@ function App() {
           <Route path='/deck/:deckID' element={ <Flashcard key={flashcards.id} flashcards={flashcards} /> } />
           <Route path='/create/card' element={ <NewCard /> } />
           <Route path='/create/deck' element={ <NewDeck /> } />
-          <Route path='/update' element={ <Discover /> } />
+          <Route path='/discover' element={ <Discover /> } />
           <Route path='/create' element={ <Create /> } />
           <Route path='/' element={ <Home /> } />
         </Routes>

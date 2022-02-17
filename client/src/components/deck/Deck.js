@@ -95,7 +95,6 @@ function Deck( props ) {
                                         </List>
                                     </span>
                                     <DivStyle style={{marginLeft:'100px'}}>
-
                                         <Button onClick={() => {navigate(`/deck/${props.deck.id}`);}} variant='contained' sx={buttonStyle} >Review Deck</Button>
                                         <IconButton onClick={() => {toggleMenu(props.deck.id); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
                                             <AppsIcon />
