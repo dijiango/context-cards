@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :flashcards, only: [:index, :create]
   resources :decks
 
+  get "/public", to: "decks#public_decks"
   post "/flashcards/:deck_id", to: "flashcards#add_flashcards"
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

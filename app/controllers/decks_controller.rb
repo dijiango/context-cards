@@ -25,6 +25,11 @@ class DecksController < ApplicationController
             deck.destroy
             head :no_content
         end
+
+        def public_decks
+            public_decks = Deck.all.select{|deck| deck.public === true}
+            render json: public_decks, status: :ok
+        end
     
         private
     

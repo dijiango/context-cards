@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from 'react';
 import { TextField, Stack, Button, Paper } from '@mui/material';
-import React, { useState } from 'react';
 
 
 const buttonStyle = {
@@ -8,9 +8,18 @@ const buttonStyle = {
 }
 
 function Discover() {
-    const [decks, setDecks] = useState();
+  const [publicDecks, setPublicDecks] = useState();
+
+  useEffect(() => {
+    fetch("/public")
+    .then(r => r.json())
+    .then(decks => setPublicDecks(decks))
+  }, []);
+
+  console.log(publicDecks);
   return (
     <div>
+      
     </div>
 )};
 
