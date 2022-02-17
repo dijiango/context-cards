@@ -8,7 +8,7 @@ import DeckMenu from './DeckMenu';
 
 const deckTitleStyle = {
     fontFamily: 'Brush Script MT, cursive',
-    margin:'auto 25px'
+    margin:'30px 25px 10px'
 }
 
 const buttonStyle ={
@@ -80,12 +80,12 @@ function Deck( props ) {
         <Stack spacing={2} alignItems='center'>  
             <LeftBar>
                 <DivStyle>
-                    <Paper elevation={2} sx={{padding:"20px"}}>
-                        <DivStyle>
-                            <img src={DeckIcon} alt='Deck Icon' height={50} />
+                    <Paper elevation={2} sx={{padding:"20px", minWidth:'650px', maxWidth:'650px'}}>
+                        <div style={{display:'flex', padding:'10px', position:'relative'}}>
+                            <img src={DeckIcon} alt='Deck Icon' height={70} />
                             <h1 style={deckTitleStyle}>{props.deck.subject}</h1>
                             {props.hideFromView ? <UsernameStyle>Created by: "{props.deck.username}"</UsernameStyle> : null}
-                        </DivStyle>
+                        </div>
                             <PTag>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
                                     <span >
