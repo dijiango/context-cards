@@ -3,6 +3,10 @@ class DecksController < ApplicationController
         def index
             render json: @current_user.decks.all, status: :ok
         end
+
+        def show_public_cards
+            render json: Deck.all, status: :ok
+        end
     
         def show
             deck = find_deck

@@ -58,7 +58,13 @@ Deck.create!([
     {
         subject: "Dad jokes", 
         summary: "A collection of jokes and puns only a father could appreciate.",
-        public: false,
+        public: true,
+        user_id: 1
+    },
+    {
+        subject: "ActiveRecord Methods", 
+        summary: "A list of the most common ActiveRecord methods and how to write them",
+        public: true,
         user_id: 1
     }
 ])
@@ -113,7 +119,27 @@ Flashcard.create!([
         term: "Why did the fisherman cross the road",
         meaning: "Just for the halibut",
         deck_id: 5
+    },
+    {
+        term: "How does a taco say grace?",
+        meaning: "Lettuce pray",
+        deck_id: 5
     }
 ])
+
+Flashcard.create!([
+    {
+        term: ".find",
+        meaning: "Model.find(:attribute)",
+        deck_id: 6
+    },
+    {
+        term: ".new/.save",
+        meaning: "Model.new(strong_params)\nModel.save",
+        deck_id: 6
+    },
+    
+])
+
 
 puts "Done seeding"

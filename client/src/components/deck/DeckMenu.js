@@ -86,9 +86,9 @@ function DeckMenu( props ) {
           <DivStyle style={menuBodyStyle}>
             <Grid container spacing={3}>
               <Grid item xl={12}><MenuText>Deck Summary:</MenuText></Grid>
-              <Grid item xl={12}><SummaryText>"{props.deckSummary}"</SummaryText></Grid>
+              <Grid item xl={12}><SummaryText>{props.deckSummary}</SummaryText></Grid>
               <Grid item sm={4}>
-                <IconButton> <DeleteIcon onClick={() => handleDelete()} color='disabled' fontSize='large'/></IconButton>               
+                <IconButton onClick={() => handleDelete()}> <DeleteIcon  color='disabled' fontSize='large'/></IconButton>               
                 <MenuText>Delete</MenuText>
               </Grid>
               <Grid item sm={4}>

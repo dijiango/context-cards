@@ -25,6 +25,7 @@ function Deck( props ) {
     const [isOpen, setIsOpen] = useState(false);
     const [flashcards, setFlashcards] = useState([]);
     const [isPublic, setIsPublic] = useState(false);
+    const [allDecks, setAllDecks] = useState([]);
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -34,15 +35,18 @@ function Deck( props ) {
             r.json().then((deck) => {
             setFlashcards(deck.flashcards);
             setIsPublic(deck.public);
+            setAllDecks(deck);
             });
         }
         });
     }, []);
 
     function changePublicView(id) {
-        console.log(id);
-        setIsPublic(!isPublic);
-        console.log(isPublic);
+        fetch(`/decks/${props.deck.id}`)
+        .then(r => r.json())
+        .then(deck => setIsPublic(!deck.public))
+        console.log("Setting the view to what it should be", isPublic);
+       
         fetch(`/decks/${id}`, {
         method: "PATCH",
         headers:  {
@@ -52,7 +56,8 @@ function Deck( props ) {
             public: isPublic
         }),
         })
-        .then(r => r.json())
+        .then(r => r.json()) 
+        
     }
 
     function toggleMenu(id) {

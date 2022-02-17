@@ -8,6 +8,9 @@ import { NavLink } from 'react-router-dom';
 const PaperStyle = {
   marginTop: '25px',
   padding: '25px',
+  fontSize: '40px',
+  fontFamily: 'Brush Script MT, cursive',
+  fontWeight: 'normal',
   color: '#392d59',
   '&:hover':{
     transform: 'scale(1.2)'

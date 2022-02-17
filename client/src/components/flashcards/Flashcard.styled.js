@@ -4,12 +4,13 @@ export const TitleText = styled.span`
     margin: 0px 10px 0px 50px;
     font-weight: bold;
     color: #4b3c73;
-    font-size: 20px;
+    font-size: 25px;
 `
 
 export const NameText = styled.span`
     font-style: italic;
     color: #7a6d8f;
+    font-size: 25px;
 `
 
 export const TitleDiv = styled.div`

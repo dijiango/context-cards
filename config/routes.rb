@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :decks
 
   get "/public", to: "decks#public_decks"
+  get "/public/:deck_id", to: "decks#show_public_cards"
   post "/flashcards/:deck_id", to: "flashcards#add_flashcards"
   post "/signup", to: "users#create"
   get "/me", to: "users#show"

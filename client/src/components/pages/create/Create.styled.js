@@ -36,5 +36,14 @@ export const Form = styled.form`
 
 export const Title = styled.h1`
     margin: 50px;
+    font-size: 40px;
+    font-family: Brush Script MT, cursive;
+    color: #392d59;
+    font-weight: normal;
 `
 
+export const Label = styled.h1`
+    font-size: 25px;
+    font-family: Brush Script MT, cursive;
+    color: #392d59;
+`

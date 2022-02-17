@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Stack, TextField, Button, Container, Box, Paper, IconButton } from '@mui/material';
-import { Form, Title } from './Create.styled';
+import { Form, Label, Title } from './Create.styled';
 import AddIcon from '@mui/icons-material/Add';
 import { Autocomplete } from '@mui/material';
 
@@ -85,7 +85,7 @@ function NewCard() {
             value={updateDeck}
             />
         <Paper sx={cardStyle}>
-          <h1>F</h1>
+          <Label>Front</Label>
           <TextField
             placeholder="What term or question are you learning?"
             variant='outlined'
@@ -98,7 +98,7 @@ function NewCard() {
           />
         </Paper>
         <Paper sx={cardStyle}>
-          <h1>B</h1>
+          <Label>Back</Label>
           <TextField
             placeholder="And the answer to that is..."
             variant='outlined'
