@@ -53,3 +53,10 @@ export const SummaryText = styled.h3`
     color: #392d5980;
     margin: -20px 10px 20px;
 `
+
+export const UsernameStyle = styled.h3`
+    color: #a192b3;
+    font-weight: normal;
+    font-style: italic;
+`
+

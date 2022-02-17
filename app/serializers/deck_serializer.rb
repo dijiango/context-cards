@@ -1,3 +1,8 @@
 class DeckSerializer < ActiveModel::Serializer
-  attributes :id, :subject, :summary, :public, :flashcards
+  attributes :id, :username, :subject, :summary, :public, :flashcards
+
+  def username
+    object.user.username
+  end
+
 end

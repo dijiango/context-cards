@@ -1,6 +1,6 @@
 import { Paper, Stack, Box, IconButton, Button } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import { LeftBar, DivStyle, PTag, List, Detail } from './Deck.styled';
+import { LeftBar, DivStyle, PTag, List, Detail, UsernameStyle } from './Deck.styled';
 import DeckIcon from '../images/cardDeck.png';
 import AppsIcon from '@mui/icons-material/Apps';
 import { useNavigate } from 'react-router-dom';
@@ -79,6 +79,7 @@ function Deck( props ) {
                         <DivStyle>
                             <img src={DeckIcon} alt='Deck Icon' height={50} />
                             <h1 style={deckTitleStyle}>{props.deck.subject}</h1>
+                            {props.hideFromView ? <UsernameStyle>Created by: "{props.deck.username}"</UsernameStyle> : null}
                         </DivStyle>
                             <PTag>
                                 <Box sx={{display: 'flex', justifyContent: 'center'}}>
@@ -96,9 +97,10 @@ function Deck( props ) {
                                     </span>
                                     <DivStyle style={{marginLeft:'100px'}}>
                                         <Button onClick={() => {navigate(`/deck/${props.deck.id}`);}} variant='contained' sx={buttonStyle} >Review Deck</Button>
-                                        <IconButton onClick={() => {toggleMenu(props.deck.id); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}>
-                                            <AppsIcon />
-                                        </IconButton>
+                                        {
+                                            props.hideFromView ? <span /> : <IconButton onClick={() => {toggleMenu(props.deck.id); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}><AppsIcon /></IconButton>
+                                        }
+                                        
                                     </DivStyle>
                                 </Box> 
                             </PTag>
