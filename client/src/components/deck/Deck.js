@@ -24,8 +24,7 @@ function Deck( props ) {
     const [deckID, setDeckID] = useState();
     const [isOpen, setIsOpen] = useState(false);
     const [flashcards, setFlashcards] = useState([]);
-    const [isPublic, setIsPublic] = useState(false);
-    const [allDecks, setAllDecks] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -33,32 +32,12 @@ function Deck( props ) {
         .then((r) => {
         if (r.ok) {
             r.json().then((deck) => {
-            setFlashcards(deck.flashcards);
-            setIsPublic(deck.public);
-            setAllDecks(deck);
+                setFlashcards(deck.flashcards);
             });
         }
         });
     }, []);
 
-    function changePublicView(id) {
-        fetch(`/decks/${props.deck.id}`)
-        .then(r => r.json())
-        .then(deck => setIsPublic(!deck.public))
-        console.log("Setting the view to what it should be", isPublic);
-       
-        fetch(`/decks/${id}`, {
-        method: "PATCH",
-        headers:  {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            public: isPublic
-        }),
-        })
-        .then(r => r.json()) 
-        
-    }
 
     function toggleMenu(id) {
         setDeckID(id);
@@ -73,8 +52,6 @@ function Deck( props ) {
             deckID={deckID}
             getDecks={props.getDecks}
             deckSummary={props.deck.summary}
-            isPublic={isPublic}
-            changePublicView={changePublicView}
         />
         }
         <Stack spacing={2} alignItems='center'>  
@@ -104,8 +81,7 @@ function Deck( props ) {
                                         <Button onClick={() => {navigate(`/deck/${props.deck.id}`);}} variant='contained' sx={buttonStyle} >Review Deck</Button>
                                         {
                                             props.hideFromView ? <span /> : <IconButton onClick={() => {toggleMenu(props.deck.id); }} variant="contained" disableRipple={true} sx={{'&:hover': {transform:'scale(1.20)'} }}><AppsIcon /></IconButton>
-                                        }
-                                        
+                                        } 
                                     </DivStyle>
                                 </Box> 
                             </PTag>

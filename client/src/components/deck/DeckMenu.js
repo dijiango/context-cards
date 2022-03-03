@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ClearIcon from '@mui/icons-material/Clear';
 import { Grid, IconButton, Paper } from '@mui/material';
 import { DivStyle,MenuHeader,MenuText,SummaryText,TitleBar } from './Deck.styled';
@@ -33,6 +33,18 @@ const iconStyle = {
 
 
 function DeckMenu( props ) {
+  const [isPublic, setIsPublic] = useState(false);
+
+  useEffect(()=>{
+    fetch(`/decks/${props.deckID}`)
+    .then((r) => {
+    if (r.ok) {
+        r.json().then((deck) => {
+            setIsPublic(deck.public);
+        });
+    }
+    });
+  }, []);
 
   function handleDelete() {
     fetch(`/decks/${props.deckID}`, {
@@ -44,34 +56,18 @@ function DeckMenu( props ) {
   }
 
   function changePublicView(id) {
-    props.changePublicView(id);
+      fetch(`/decks/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          public: !isPublic
+        })
+      })
+        .then(r => r.json())
+        .then(deck => setIsPublic(deck.public))
   }
-
-//   function changePublicTrue() {
-//       fetch(`/decks/${props.deckID}`, {
-//       method: "PATCH",
-//       headers:  {
-//           "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//           public: 'true'
-//       }),
-//     })
-//       .then(r => r.json())
-//   }
-
-//   function changePublicFalse() {
-//     fetch(`/decks/${props.deckID}`, {
-//     method: "PATCH",
-//     headers:  {
-//         "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//         public: 'false'
-//     }),
-//     })
-//     .then(r => r.json())
-// }
 
   return (
     <PopupBox>
@@ -93,7 +89,7 @@ function DeckMenu( props ) {
               </Grid>
               <Grid item sm={4}>
               <IconButton onClick={()=> changePublicView(props.deckID)}>
-                  {props.isPublic ? <VisibilityIcon  color='disabled' fontSize='large'/> :  <VisibilityOffIcon color='disabled' fontSize='large'/>}            
+                  {isPublic ? <VisibilityIcon  color='disabled' fontSize='large'/> :  <VisibilityOffIcon color='disabled' fontSize='large'/>}            
               </IconButton>
                 <MenuText>Public</MenuText>
               </Grid>
