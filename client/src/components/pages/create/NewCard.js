@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Stack, TextField, Button, Container, Box, Paper, IconButton } from '@mui/material';
 import { Form, Label, Title } from './Create.styled';
-import AddIcon from '@mui/icons-material/Add';
 import { Autocomplete } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const buttonStyle = {
-  float: 'right',
-  margin: '20px 0px 10px'
-}
+import AddIcon from '@mui/icons-material/Add';
+import { ErrorMessage, LinkToDeck } from './NewCard.styled';
+
 
 const boxStyle = {
   margin: 4,
@@ -16,6 +15,11 @@ const boxStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center'
+}
+
+const stackStyle = {
+  display: 'inline-block',
+  textAlign: 'center'
 }
 
 const cardStyle = {
@@ -38,15 +42,17 @@ const AddButton = {
 function NewCard() {
   const [term, setTerm] = useState();
   const [meaning, setMeaning] = useState();
-  const [deckID, setDeckID] = useState();
   const [updateDeck, setUpdateDeck] = useState("");
-
   const [decks, setDecks] = useState([]);
+  const [linkToReview, setLinkToReview] = useState(false)
+  const [error, setError] = useState(false);
+
+  const navigate = useNavigate();
 
   function getDecks() {
     fetch("/decks")
     .then(r => r.json())
-    .then(data => setDecks(data))
+    .then(data => setDecks(data), setLinkToReview(false))
   }
   useEffect(() => {
     getDecks();
@@ -54,17 +60,28 @@ function NewCard() {
 
   function handleSubmit(e) {
       e.preventDefault();
-      fetch(`/flashcards/${updateDeck.id}`, {
-        method: "POST",
-        headers:  {
+      if (term !== undefined && meaning !== undefined) {
+        fetch(`/flashcards/${updateDeck.id}`, {
+          method: "POST",
+          headers:  {
             "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+          },
+          body: JSON.stringify({
             term, meaning
-        }),
-    })
-    .then(r => r.json())
-    .then(setTerm(''), setMeaning(''))
+          }),
+        })
+        .then(r => r.json())
+        .then(setTerm(''), setMeaning(''))
+      } else {
+        setError(true);
+      }
+  }
+
+  function afterAddingCard() {
+    if (updateDeck.id !== undefined) {
+      setLinkToReview(true);
+      
+    }
   }
 
   return( 
@@ -73,7 +90,7 @@ function NewCard() {
     <Box sx={boxStyle}>
       <Title>Create Your Flashcard</Title>
       <Form onSubmit={handleSubmit}>
-      <Stack sx={{display:'inline-block', textAlign:'center'}}>
+      <Stack sx={stackStyle}>
         <Autocomplete
           id='update deck'
           options={decks}
@@ -110,8 +127,9 @@ function NewCard() {
             value={meaning}
           />
         </Paper>
-        <IconButton type='submit'><AddIcon sx={AddButton}/></IconButton>
-        
+        <IconButton type='submit' onClick={afterAddingCard}><AddIcon sx={AddButton}/></IconButton>
+        { linkToReview ? <LinkToDeck onClick={() => {navigate(`/deck/${updateDeck.id}`);}}>Review this deck</LinkToDeck> : <article /> }
+        { error ? <ErrorMessage>Flashcards can't be blank. Include a term and a description before adding to a deck</ErrorMessage> : <article /> }
       </Stack>
       </Form>
     </Box>
