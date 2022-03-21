@@ -35,4 +35,4 @@ You can use the following commands to run the application:
 * `rails s`: to run the backend on [http://localhost:3000](http://localhost:3000).
 * `npm start --prefix client`: to run the frontend on [http://localhost:4000](http://localhost:4000).
 
-<em>This capstone project was built at Flatiron School after 13 weeks in their instensive software engineering bootcamp.</em>
+<em>This capstone project was built at Flatiron School after 13 weeks in the intensive, software engineering bootcamp.</em>
