@@ -1,5 +1,15 @@
 # Context
 
+<p float="left">
+  <img src="https://icon-library.com/images/react_1353128.png" alt="React" height="25px">&nbsp
+  <img src="https://icon-library.com/images/ruby-icon/ruby-icon-28.jpg" alt="Ruby" height="25px">&nbsp
+  <img src="https://icon-library.com/images/ruby-on-rails-512_110895.png" alt="Rails" height="25px">&nbsp
+  <img src="https://cdn.worldvectorlogo.com/logos/material-ui-1.svg" height="25px">
+</p>
+
+A full-stack digital flashcard application where users can create and share flashcards decks.
+
+[Demo](https://www.loom.com/share/07c8d22e86f949dfbf73451c9b5b80b4)
 ## Requirements
 
 * Ruby 2.7.4 ([Docs](https://www.ruby-lang.org/en/documentation/))
