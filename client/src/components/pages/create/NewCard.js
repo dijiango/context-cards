@@ -5,7 +5,7 @@ import { Autocomplete } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import AddIcon from '@mui/icons-material/Add';
-import { ErrorMessage, LinkToDeck } from './NewCard.styled';
+import { ErrorMessage, LinkMessage} from './New.styled';
 
 
 const boxStyle = {
@@ -45,14 +45,15 @@ function NewCard() {
   const [updateDeck, setUpdateDeck] = useState("");
   const [decks, setDecks] = useState([]);
   const [linkToReview, setLinkToReview] = useState(false)
-  const [error, setError] = useState(false);
+  const [cardError, setCardError] = useState('');
+  const [deckError, setDeckError] = useState('');
 
   const navigate = useNavigate();
 
   function getDecks() {
     fetch("/decks")
     .then(r => r.json())
-    .then(data => setDecks(data), setLinkToReview(false))
+    .then(data => setDecks(data))
   }
   useEffect(() => {
     getDecks();
@@ -60,7 +61,7 @@ function NewCard() {
 
   function handleSubmit(e) {
       e.preventDefault();
-      if (term !== undefined && meaning !== undefined) {
+      if (updateDeck.id !== undefined && term !== undefined && meaning !== undefined) {
         fetch(`/flashcards/${updateDeck.id}`, {
           method: "POST",
           headers:  {
@@ -71,18 +72,59 @@ function NewCard() {
           }),
         })
         .then(r => r.json())
-        .then(setTerm(''), setMeaning(''))
+        .then(setTerm(''), setMeaning(''), setCardError(''), setDeckError(''), setLinkToReview(true))
       } else {
-        setError(true);
+        if (term === undefined && meaning === undefined) {
+          setCardError("Flashcards can't be blank. Fill out the front and back before adding to a deck.");
+          if (updateDeck.id === undefined) {
+            setDeckError("Which deck should this flashcard be added to?");
+          } else setDeckError('');
+        }
+        else if (term !== undefined && meaning === undefined) {
+          setCardError("Write on the backside of your card before adding to a deck.");
+          if (updateDeck.id === undefined) {
+            setDeckError("Which deck should this flashcard be added to?");
+          } else setDeckError('');
+        }
+        else if (term === undefined && meaning !== undefined) {
+          setCardError("Write on the frontside of your card before adding to a deck.");
+          if (updateDeck.id === undefined) {
+            setDeckError("Which deck should this flashcard be added to?");
+          } else setDeckError('');
+        }
       }
   }
 
-  function afterAddingCard() {
-    if (updateDeck.id !== undefined) {
-      setLinkToReview(true);
-      
-    }
-  }
+  // function afterAddingCard() {
+  //   if (updateDeck.id !== undefined) {
+  //     setDeckError('');
+  //     setLinkToReview(true);
+  //   }
+    // if (updateDeck.id === undefined) {
+    //   if (term === undefined && meaning === undefined) {
+    //     setCardError("Flashcards can't be blank. Fill out the front and back before adding to a deck.");
+    //   }
+    //   else if (term !== undefined && meaning === undefined) {
+    //     setCardError("Write on the backside of your card before adding to a deck.");
+    //   }
+    //   else if (term === undefined && meaning !== undefined) {
+    //     setCardError("Write on the frontside of your card before adding to a deck.");
+    //   }
+    //   setDeckError("Which deck should this flashcard be added to?");
+    // } else {
+    //   if (term === undefined && meaning === undefined) {
+    //     setCardError("Flashcards can't be blank. Fill out the front and back before adding to a deck.");
+    //   }
+    //   else if (term !== undefined && meaning === undefined) {
+    //     setCardError("Write on the backside of your card before adding to a deck.");
+    //   }
+    //   else if (term === undefined && meaning !== undefined) {
+    //     setCardError("Write on the frontside of your card before adding to a deck.");
+    //   }
+    //   setDeckError('');
+    //   setLinkToReview(true);
+    // }
+  // }
 
   return( 
   <div>
@@ -127,9 +169,10 @@ function NewCard() {
             value={meaning}
           />
         </Paper>
-        <IconButton type='submit' onClick={afterAddingCard}><AddIcon sx={AddButton}/></IconButton>
-        { linkToReview ? <LinkToDeck onClick={() => {navigate(`/deck/${updateDeck.id}`);}}>Review this deck</LinkToDeck> : <article /> }
-        { error ? <ErrorMessage>Flashcards can't be blank. Include a term and a description before adding to a deck</ErrorMessage> : <article /> }
+        <IconButton type='submit'><AddIcon sx={AddButton}/></IconButton>
+        { linkToReview ? <LinkMessage onClick={() => {navigate(`/deck/${updateDeck.id}`);}}>Review this deck</LinkMessage> : <article /> }
+        { deckError !== '' ? <ErrorMessage>{deckError}</ErrorMessage> : <article /> }
+        { cardError !== '' ? <ErrorMessage>{cardError}</ErrorMessage> : <article /> }
       </Stack>
       </Form>
     </Box>

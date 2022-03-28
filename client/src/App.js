@@ -6,6 +6,7 @@ import Discover from './components/pages/discover/Discover';
 import Create from './components/pages/create/Create';
 import Home from './components/pages/home/Home';
 import CheckUser from "./components/authorization/CheckUser";
+import Quiz from "./components/quiz/Quiz";
 
 import Flashcard from "./components/flashcards/Flashcard";
 import NewCard from "./components/pages/create/NewCard";
@@ -54,6 +55,7 @@ function App() {
       <BrowserRouter>
         <Topbar key={user.id} user={user} setUser={setUser}/>
         <Routes>
+          <Route path='/quiz' element={ <Quiz /> } />
           <Route path='/user/settings' element={<UserSetting key={user.id} user={user}/>} />
           <Route path='/deck/:deckID' element={ <Flashcard key={flashcards.id} flashcards={flashcards} /> } />
           <Route path='/create/card' element={ <NewCard /> } />

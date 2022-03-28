@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Stack, TextField, Button, Container, Box, Paper } from '@mui/material';
 import { Form, Title } from './Create.styled';
+import { ErrorMessage, LinkMessage } from './New.styled';
+import { useNavigate } from 'react-router-dom';
+
 
 const buttonStyle = {
     float: 'right',
@@ -20,6 +23,9 @@ function NewDeck() {
     const [subject, setSubject] = useState();
     const [summary, setSummary] = useState();
     const [errors, setErrors] = useState([]);
+    const [acceptedDeck, setAcceptedDeck] = useState(false);
+
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -34,7 +40,7 @@ function NewDeck() {
         })
         .then(r => {
             if (r.ok) {
-                r.json().then(setSubject(''), setSummary(''))
+                r.json().then(setAcceptedDeck(true))
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
@@ -69,6 +75,14 @@ function NewDeck() {
         </Stack>
         <Button variant='outlined' size='large' color='secondary' type='submit' sx={buttonStyle}>Submit</Button>
     </Form>
+    { 
+        acceptedDeck ? (
+            <div>
+                <LinkMessage onClick={() => {navigate(`/create/card`);}}>Add flashcards to this deck.</LinkMessage>
+                <LinkMessage onClick={() => {setSubject(''); setSummary('');}}>Or, create another deck.</LinkMessage>
+            </div>
+        ) : <ErrorMessage>{errors}</ErrorMessage>
+    }
     </Box>      
     </Paper>
     </Container>

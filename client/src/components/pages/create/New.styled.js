@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LinkToDeck = styled.article`
+export const LinkMessage = styled.article`
     color: blue;
     margin: 25px 0px 0px 0px;
     font-family: Brush Script MT, cursive;
