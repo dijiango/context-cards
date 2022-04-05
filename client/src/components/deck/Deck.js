@@ -8,7 +8,7 @@ import DeckMenu from './DeckMenu';
 
 const deckTitleStyle = {
     fontFamily: 'Brush Script MT, cursive',
-    margin:'30px 25px 10px'
+    margin:'auto 25px auto'
 }
 
 const buttonStyle ={
