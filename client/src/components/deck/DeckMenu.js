@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import ClearIcon from '@mui/icons-material/Clear';
+import { useNavigate } from 'react-router-dom';
 import { Grid, IconButton, Paper } from '@mui/material';
 import { DivStyle,MenuHeader,MenuText,SummaryText,TitleBar } from './Deck.styled';
 import { MenuBox, PopupBox } from '../Popup.styled';
+import ClearIcon from '@mui/icons-material/Clear';
 import DeleteIcon from '@mui/icons-material/Delete';
-import PageviewIcon from '@mui/icons-material/Pageview';
 import QuizIcon from '@mui/icons-material/Quiz';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const menuHeaderStyle = {
-  backgroundColor: '#392d59'
+  backgroundColor: '#392d59',
+  textAlign: 'left'
 }
 
 const menuBodyStyle = {
@@ -23,7 +24,7 @@ const rightBarStyle = {
 }
 
 const leftBarStyle = {
-
+  textAlign: 'left'
 }
 
 const iconStyle = {
@@ -34,6 +35,8 @@ const iconStyle = {
 
 function DeckMenu( props ) {
   const [isPublic, setIsPublic] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(()=>{
     fetch(`/decks/${props.deckID}`)
@@ -94,7 +97,7 @@ function DeckMenu( props ) {
                 <MenuText>Public</MenuText>
               </Grid>
               <Grid item sm={4}>
-              <IconButton><QuizIcon color='disabled' fontSize='large'/></IconButton>                
+              <IconButton onClick={() => {navigate(`/quiz/${props.deckID}`)}}><QuizIcon color='disabled' fontSize='large'/></IconButton>                
                 <MenuText>Quiz Mode</MenuText>
               </Grid>
               

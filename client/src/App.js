@@ -55,7 +55,7 @@ function App() {
       <BrowserRouter>
         <Topbar key={user.id} user={user} setUser={setUser}/>
         <Routes>
-          <Route path='/quiz' element={ <Quiz /> } />
+          <Route path='/quiz/:deckID' element={ <Quiz /> } />
           <Route path='/user/settings' element={<UserSetting key={user.id} user={user}/>} />
           <Route path='/deck/:deckID' element={ <Flashcard key={flashcards.id} flashcards={flashcards} /> } />
           <Route path='/create/card' element={ <NewCard /> } />
